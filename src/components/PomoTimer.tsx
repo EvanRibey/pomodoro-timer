@@ -21,6 +21,7 @@ import {
 
 export default function PomoTimer({
   queue,
+  onTimerStart,
   onTimerEnd,
 }: PomoTimerProps) {
   const [currentTimer, setCurrentTimer] = useState<QueueItem>(queue[0]);
@@ -33,12 +34,13 @@ export default function PomoTimer({
     if (remainingQueue.length) {
       const [nextQueueItem, ...rest] = remainingQueue;
       setCurrentTimer(nextQueueItem)
+      onTimerStart(nextQueueItem);
       setRemainingQueue([...rest]);
       setCountdownTime(minutesToSeconds(nextQueueItem.duration));
     } else {
       onTimerEnd();
     }
-  }, [remainingQueue]);
+  }, [onTimerStart, remainingQueue]);
 
   useEffect(() => {
     const timerId = setInterval(() => {

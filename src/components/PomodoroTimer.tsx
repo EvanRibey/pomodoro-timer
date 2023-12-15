@@ -7,15 +7,25 @@ import PomoTimer from './PomoTimer';
 export default function PomodoroTimer() {
   const [queueList, setQueueList] = useState<QueueItem[]>([]);
 
+  const removeAllBodyStyles = useCallback(() => {
+    document.body.classList.remove('focus', 'break', 'break-long');
+  }, []);
+
+  const timerStartHandler = useCallback((timer: QueueItem) => {
+    removeAllBodyStyles();
+    document.body.classList.add(timer.type);
+  }, []);
+
   const submitFormHandler = useCallback((formValues: PomodoroTimerFormHandlerProps) => {
     const pomoQueueItems = generateQueueList(formValues.intervals);
-    console.log(pomoQueueItems);
     setQueueList(pomoQueueItems);
-  }, []);
+    timerStartHandler(pomoQueueItems[0]);
+  }, [timerStartHandler]);
 
   const timerCompleteHandler = useCallback(() => {
     setQueueList([]);
-  }, []);
+    removeAllBodyStyles();
+  }, [removeAllBodyStyles]);
 
   const isFormShowing = !queueList.length;
 
@@ -24,6 +34,7 @@ export default function PomodoroTimer() {
       {!!queueList.length && (
         <PomoTimer 
           queue={queueList}
+          onTimerStart={timerStartHandler}
           onTimerEnd={timerCompleteHandler}
         />
       )}

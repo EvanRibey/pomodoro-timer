@@ -13,6 +13,7 @@ export interface PomoFormProps {
 
 export interface PomoTimerProps {
   queue: QueueItem[],
+  onTimerStart: Function,
   onTimerEnd: Function,
 }
 

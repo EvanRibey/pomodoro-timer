@@ -18,7 +18,7 @@ export const POMODORO_TIMER_FOCUS = 25;
 export const POMODORO_TIMER_BREAK = 5;
 export const POMODORO_TIMER_BREAK_LONG = 15;
 
-export const POMODORO_TIMER_HEIGHT = 300;
+export const POMODORO_TIMER_HEIGHT = 350;
 
 export const MINUTES_IN_SECOND = 60;
 export const MILLISECONDS_IN_SECOND = 1000;
