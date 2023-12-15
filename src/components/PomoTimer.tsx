@@ -1,0 +1,96 @@
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { PomoTimerProps, QueueItem } from '../utils/types';
+import { minutesToSeconds } from '../utils/timerHelpers';
+import formatToTwoNumbers from '../utils/numberHelpers';
+import soundEffect from '../assets/countdown-sound-effect.mp3';
+import './PomoTimer.less';
+import {
+  MILLISECONDS_IN_SECOND,
+  MINUTES_IN_SECOND,
+  POMODORO_TIMER_HEIGHT,
+  POMO_STATE_DESCRIPTION_BREAK,
+  POMO_STATE_DESCRIPTION_BREAK_LONG,
+  POMO_STATE_DESCRIPTION_FOCUS,
+  POMO_STATE_TITLE_BREAK,
+  POMO_STATE_TITLE_BREAK_LONG,
+  POMO_STATE_TITLE_FOCUS,
+  QUEUE_TYPE_BREAK,
+  QUEUE_TYPE_BREAK_LONG,
+  QUEUE_TYPE_FOCUS,
+} from '../utils/constants';
+
+export default function PomoTimer({
+  queue,
+  onTimerEnd,
+}: PomoTimerProps) {
+  const [currentTimer, setCurrentTimer] = useState<QueueItem>(queue[0]);
+  const [remainingQueue, setRemainingQueue] = useState<QueueItem[]>(queue.slice(1));
+  const [countdownTime, setCountdownTime] = useState(minutesToSeconds(queue[0].duration));
+
+  const soundEffectAudio = useMemo(() => new Audio(soundEffect), []);
+
+  const setNextItem = useCallback(() => {
+    if (remainingQueue.length) {
+      const [nextQueueItem, ...rest] = remainingQueue;
+      setCurrentTimer(nextQueueItem)
+      setRemainingQueue([...rest]);
+      setCountdownTime(minutesToSeconds(nextQueueItem.duration));
+    } else {
+      onTimerEnd();
+    }
+  }, [remainingQueue]);
+
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setCountdownTime((prevCountdownTimer) => {
+        const newTimer = prevCountdownTimer - 1;
+
+        if (newTimer === 3) {
+          soundEffectAudio.play();
+        }
+
+        if (!newTimer) {
+          setNextItem();
+        }
+
+        return newTimer;
+      });
+    }, MILLISECONDS_IN_SECOND);
+
+    return () => clearTimeout(timerId);
+  }, [soundEffectAudio, setNextItem]);
+
+  const { type, duration } = currentTimer;
+  const sandHeight = POMODORO_TIMER_HEIGHT * countdownTime / minutesToSeconds(duration);
+  const minutes = Math.floor(countdownTime / MINUTES_IN_SECOND);
+  const seconds = formatToTwoNumbers(countdownTime - minutes * MINUTES_IN_SECOND);
+  let title = '';
+  let descriptor = '';
+
+  switch(type) {
+    case QUEUE_TYPE_BREAK:
+      title = POMO_STATE_TITLE_BREAK;
+      descriptor = POMO_STATE_DESCRIPTION_BREAK;
+      break;
+
+    case QUEUE_TYPE_BREAK_LONG:
+      title = POMO_STATE_TITLE_BREAK_LONG;
+      descriptor = POMO_STATE_DESCRIPTION_BREAK_LONG;
+      break;
+
+    case QUEUE_TYPE_FOCUS:
+    default:
+      title = POMO_STATE_TITLE_FOCUS;
+      descriptor = POMO_STATE_DESCRIPTION_FOCUS;
+      break;
+  }
+
+  return (
+    <div className="pomo-timer">
+      <div className="sand" style={{ height: sandHeight }}></div>
+      <h2 className="title">{title}</h2>
+      <p className="description">{descriptor}</p>
+      <p className="timer">{minutes}:{seconds}</p>
+    </div>
+  );
+}

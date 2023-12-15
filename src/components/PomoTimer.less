@@ -1,0 +1,46 @@
+.pomo-timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid white;
+  position: relative;
+  width: 300px;
+  height: 300px;
+  padding: 20px;
+
+  .sand {
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  .timer {
+    text-shadow: 0 1px black;
+    margin: 0;
+    z-index: 1;
+    font-size: 24px;
+    font-weight: bold;
+    mix-blend-mode: difference;
+  }
+
+  .description {
+    text-shadow: 0 1px black;
+    z-index: 1;
+    margin: 0 0 16px;
+    font-style: italic;
+    font-size: 14px;
+    mix-blend-mode: difference;
+  }
+
+  .title {
+    text-shadow: 0 1px black;
+    z-index: 1;
+    margin: 0 0 12px;
+    font-size: 24px;
+    line-height: 1.1;
+    mix-blend-mode: difference;
+  }
+}

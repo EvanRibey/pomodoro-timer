@@ -1,8 +1,22 @@
-import { QUEUE_TYPE_FOCUS, QUEUE_TYPE_BREAK } from './constants';
-
-type QueueItemType = typeof QUEUE_TYPE_FOCUS | typeof QUEUE_TYPE_BREAK;
-
+// general props
 export interface QueueItem {
-  type: QueueItemType,
+  type: string,
   duration: number,
+}
+
+export type Nullish = null | undefined;
+
+// Component PropTypes
+export interface PomoFormProps {
+  onSubmitForm: Function,
+}
+
+export interface PomoTimerProps {
+  queue: QueueItem[],
+  onTimerEnd: Function,
+}
+
+// Handler Props
+export interface PomodoroTimerFormHandlerProps {
+  intervals: number,
 }

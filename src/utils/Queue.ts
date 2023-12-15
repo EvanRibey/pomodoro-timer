@@ -11,9 +11,9 @@ export default class Queue {
     return this.queue.length === 0;
   }
 
-  enqueue(item: QueueItem) {
-    if (this.isEmpty()) return null;
-    this.queue.push(item);
+  enqueue(items: QueueItem | QueueItem[]) {
+    const arrayQueueItems = Array.isArray(items) ? items : [items];
+    this.queue.push(...arrayQueueItems);
     return true;
   }
 
