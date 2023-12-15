@@ -1,8 +1,8 @@
+import './PomoForm.less';
 import { useState, useCallback } from 'react';
 import { Button, TextField } from '@mui/material';
-import { POMODORO_INITIAL_INTERVAL } from '../utils/constants';
-import { PomoFormProps } from '../utils/types';
-import './PomoForm.less';
+import { POMODORO_INITIAL_INTERVAL } from '../constants';
+import { PomoFormProps } from '../constants/types';
 
 export default function PomoForm({ onSubmitForm }: PomoFormProps) {
   const [numberPomodoros, setNumberPomodoros] = useState(POMODORO_INITIAL_INTERVAL);

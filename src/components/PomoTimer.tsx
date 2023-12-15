@@ -1,9 +1,9 @@
+import './PomoTimer.less';
+import soundEffect from '../assets/countdown-sound-effect.mp3';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { PomoTimerProps, QueueItem } from '../utils/types';
+import { PomoTimerProps, QueueItem } from '../constants/types';
 import { minutesToSeconds } from '../utils/timerHelpers';
 import formatToTwoNumbers from '../utils/numberHelpers';
-import soundEffect from '../assets/countdown-sound-effect.mp3';
-import './PomoTimer.less';
 import {
   MILLISECONDS_IN_SECOND,
   MINUTES_IN_SECOND,
@@ -17,7 +17,7 @@ import {
   QUEUE_TYPE_BREAK,
   QUEUE_TYPE_BREAK_LONG,
   QUEUE_TYPE_FOCUS,
-} from '../utils/constants';
+} from '../constants';
 
 export default function PomoTimer({
   queue,
