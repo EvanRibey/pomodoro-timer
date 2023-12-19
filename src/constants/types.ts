@@ -20,4 +20,5 @@ export interface PomoTimerProps {
 // Handler Props
 export interface PomodoroTimerFormHandlerProps {
   intervals: number,
+  isLong: boolean,
 }

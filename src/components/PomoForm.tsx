@@ -1,23 +1,41 @@
 import './PomoForm.less';
 import { useState, useCallback } from 'react';
-import { Button, TextField } from '@mui/material';
-import { POMODORO_INITIAL_INTERVAL } from '../constants';
+import {
+  Button,
+  FormControlLabel,
+  FormHelperText,
+  Switch,
+  TextField,
+} from '@mui/material';
+import {
+  POMODORO_INITIAL_INTERVAL,
+  POMO_FORM_HELPER_COUNT,
+  POMO_FORM_HELPER_LONG_CYCLES,
+  POMO_FORM_LABEL_COUNT,
+  POMO_FORM_LABEL_LONG_CYCLES,
+} from '../constants';
 import { PomoFormProps } from '../constants/types';
 
 export default function PomoForm({ onSubmitForm }: PomoFormProps) {
   const [numberPomodoros, setNumberPomodoros] = useState(POMODORO_INITIAL_INTERVAL);
+  const [isLongPomoChecked, setIsLongPomoChecked] = useState(false);
 
   const setPomodoroIntervalsHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setNumberPomodoros(Number(event.currentTarget.value));
   }, []);
 
+  const changeLongPomoHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsLongPomoChecked(event.target.checked);
+  }, []);
+
   const formSubmitHandler = useCallback(() => {
     onSubmitForm({
       intervals: numberPomodoros,
+      isLong: isLongPomoChecked,
     });
-  }, [numberPomodoros]);
+  }, [isLongPomoChecked, numberPomodoros]);
 
-  const willShowCountNote = numberPomodoros >= 4;
+  const countNote = numberPomodoros >= 4 ? POMO_FORM_HELPER_COUNT : '';
 
   return (
     <form
@@ -27,14 +45,22 @@ export default function PomoForm({ onSubmitForm }: PomoFormProps) {
       <h2 className="title">Pomodoro Timer</h2>
       <TextField
         classes={{ root: 'interval-timer' }}
-        label="Pomodoro Sessions"
+        helperText={countNote}
+        label={POMO_FORM_LABEL_COUNT}
         onChange={setPomodoroIntervalsHandler}
         type="number"
         value={numberPomodoros}
       />
-      {willShowCountNote && (
-        <p className="pomo-count-note">Session counts after 4 will include a long break timer.</p>
-      )}
+      <FormControlLabel
+        control={
+          <Switch
+            checked={isLongPomoChecked}
+            onChange={changeLongPomoHandler}
+          />
+        }
+        label={POMO_FORM_LABEL_LONG_CYCLES}
+      />
+      <FormHelperText classes={{ root: 'long-switch' }}>{POMO_FORM_HELPER_LONG_CYCLES}</FormHelperText>
       <Button variant="contained" type="submit">Start timer</Button>
     </form>
   );
