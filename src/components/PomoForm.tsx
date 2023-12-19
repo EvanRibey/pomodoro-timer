@@ -1,5 +1,6 @@
 import './PomoForm.less';
 import { useState, useCallback } from 'react';
+import classNames from 'classnames';
 import {
   Button,
   FormControlLabel,
@@ -15,7 +16,6 @@ import {
   POMO_FORM_LABEL_LONG_CYCLES,
 } from '../constants';
 import { PomoFormProps } from '../constants/types';
-import classNames from 'classnames';
 
 export default function PomoForm({ onSubmitForm }: PomoFormProps) {
   const [numberPomodoros, setNumberPomodoros] = useState(POMODORO_INITIAL_INTERVAL);
