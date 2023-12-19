@@ -15,6 +15,7 @@ import {
   POMO_FORM_LABEL_LONG_CYCLES,
 } from '../constants';
 import { PomoFormProps } from '../constants/types';
+import classNames from 'classnames';
 
 export default function PomoForm({ onSubmitForm }: PomoFormProps) {
   const [numberPomodoros, setNumberPomodoros] = useState(POMODORO_INITIAL_INTERVAL);
@@ -52,6 +53,7 @@ export default function PomoForm({ onSubmitForm }: PomoFormProps) {
         value={numberPomodoros}
       />
       <FormControlLabel
+        classes={{ root: classNames({ 'long-switch': !isLongPomoChecked }) }}
         control={
           <Switch
             checked={isLongPomoChecked}
@@ -60,7 +62,9 @@ export default function PomoForm({ onSubmitForm }: PomoFormProps) {
         }
         label={POMO_FORM_LABEL_LONG_CYCLES}
       />
-      <FormHelperText classes={{ root: 'long-switch' }}>{POMO_FORM_HELPER_LONG_CYCLES}</FormHelperText>
+      {isLongPomoChecked && (
+        <FormHelperText classes={{ root: 'long-switch' }}>{POMO_FORM_HELPER_LONG_CYCLES}</FormHelperText>
+      )}
       <Button variant="contained" type="submit">Start timer</Button>
     </form>
   );
