@@ -17,7 +17,8 @@ export default function PomodoroTimer() {
   }, []);
 
   const submitFormHandler = useCallback((formValues: PomodoroTimerFormHandlerProps) => {
-    const pomoQueueItems = generateQueueList(formValues.intervals);
+    const { intervals, isLong } = formValues;
+    const pomoQueueItems = generateQueueList(intervals, isLong);
     setQueueList(pomoQueueItems);
     timerStartHandler(pomoQueueItems[0]);
   }, [timerStartHandler]);
