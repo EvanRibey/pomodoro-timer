@@ -1,11 +1,11 @@
 import './PomoTimer.less';
 import soundEffect from '../assets/countdown-sound-effect.mp3';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import PomoWorker from '../workers/pomotimer.worker.js?worker';
 import { PomoTimerProps, QueueItem } from '../constants/types';
 import { minutesToSeconds } from '../utils/timerHelpers';
 import formatToTwoNumbers from '../utils/numberHelpers';
 import {
-  MILLISECONDS_IN_SECOND,
   MINUTES_IN_SECOND,
   POMODORO_TIMER_HEIGHT,
   POMO_STATE_DESCRIPTION_BREAK,
@@ -24,6 +24,7 @@ export default function PomoTimer({
   onTimerStart,
   onTimerEnd,
 }: PomoTimerProps) {
+  const [serviceWorker, setServiceWorker] = useState<Worker | null>(null);
   const [currentTimer, setCurrentTimer] = useState<QueueItem>(queue[0]);
   const [remainingQueue, setRemainingQueue] = useState<QueueItem[]>(queue.slice(1));
   const [countdownTime, setCountdownTime] = useState(minutesToSeconds(queue[0].duration));
@@ -43,24 +44,33 @@ export default function PomoTimer({
   }, [onTimerStart, remainingQueue]);
 
   useEffect(() => {
-    const timerId = setInterval(() => {
-      setCountdownTime((prevCountdownTimer) => {
-        const newTimer = prevCountdownTimer - 1;
+    const workerInstance = new PomoWorker();
+    setServiceWorker(workerInstance);
 
-        if (newTimer === 3) {
-          soundEffectAudio.play();
-        }
+    return () => {
+      workerInstance.terminate();
+    };
+  }, []);
 
-        if (!newTimer) {
-          setNextItem();
-        }
+  useEffect(() => {
+    if (serviceWorker) {
+      serviceWorker.onmessage = () => {
+        setCountdownTime((prevCountdownTimer) => {
+          const newTimer = prevCountdownTimer - 1;
 
-        return newTimer;
-      });
-    }, MILLISECONDS_IN_SECOND);
+          if (newTimer === 3) {
+            soundEffectAudio.play();
+          }
 
-    return () => clearTimeout(timerId);
-  }, [soundEffectAudio, setNextItem]);
+          if (!newTimer) {
+            setNextItem();
+          }
+
+          return newTimer;
+        });
+      };
+    }
+  }, [soundEffectAudio, setNextItem, serviceWorker]);
 
   const { type, duration } = currentTimer;
   const sandHeight = POMODORO_TIMER_HEIGHT * countdownTime / minutesToSeconds(duration);
