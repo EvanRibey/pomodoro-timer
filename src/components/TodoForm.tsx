@@ -1,45 +1,33 @@
 import { Checkbox, TextField } from '@mui/material';
+import { useCallback } from 'react';
 import { TodoFormProps } from '../constants/types';
-import { useCallback, useState } from 'react';
+import { TODO_FORM_HELPER_TEXT_FIELD, TODO_FORM_NAME_CHECKBOX, TODO_FORM_NAME_TEXTFIELD } from '../constants';
 import './TodoForm.less';
 
-export default function TodoForm({
-  onCreateTodo,
-}: TodoFormProps) {
-  const [todoName, setTodoName] = useState<string>('');
-  const [isComplete, setIsComplete] = useState<boolean>(false);
-
-  const updateTodoNameHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setTodoName(event.target.value);
-  }, []);
-
-  const enterKeyPressHandler = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      onCreateTodo({ name: todoName, isComplete });
-      setTodoName('');
-      setIsComplete(false);
-    }
-  }, [isComplete, onCreateTodo, todoName]);
-
-  const updateTodoCompleteHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsComplete(event.target.checked);
-  }, []);
+export default function TodoForm({ onCreateTodo }: TodoFormProps) {
+  const submitFormHandler = useCallback((event: React.SyntheticEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    onCreateTodo({
+      name: formData.get(TODO_FORM_NAME_TEXTFIELD),
+      isComplete: formData.get(TODO_FORM_NAME_CHECKBOX) === 'on',
+    });
+    event.currentTarget.reset();
+  }, [onCreateTodo]);
 
   return (
-    <div className="todo-form">
+    <form onSubmit={submitFormHandler} className="todo-form">
       <Checkbox
         classes={{ root: 'checkbox', colorPrimary: 'primary', checked: 'checked' }}
-        onChange={updateTodoCompleteHandler}
-        checked={isComplete}
+        name="isComplete"
       />
       <TextField
         classes={{ root: 'text-field' }}
         fullWidth
-        onChange={updateTodoNameHandler}
-        onKeyUp={enterKeyPressHandler}
-        value={todoName}
+        helperText={TODO_FORM_HELPER_TEXT_FIELD}
+        name="name"
         variant="standard"
       />
-    </div>
+    </form>
   );
 }
