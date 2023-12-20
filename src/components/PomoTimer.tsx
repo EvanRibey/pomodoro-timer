@@ -112,6 +112,7 @@ export default function PomoTimer({
       <IconButton
         aria-label="stop timer"
         classes={{ root: 'stop-button' }}
+        color="primary"
         onClick={clickStopButtonHandler}
       >
         <StopCircle />
