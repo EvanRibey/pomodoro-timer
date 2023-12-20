@@ -29,3 +29,6 @@ export const POMODORO_TIMER_HEIGHT = 292; // accounts for border size of parent
 
 export const MINUTES_IN_SECOND = 60;
 export const MILLISECONDS_IN_SECOND = 1000;
+
+// initial values
+export const POMO_FORM_DEFAULT_TASKS = [{ id: 'default', name: 'Make todo list', isComplete: true }];

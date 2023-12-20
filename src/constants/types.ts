@@ -5,6 +5,7 @@ export interface QueueItem {
 }
 
 export interface TodoItem {
+  id: string,
   name: string,
   isComplete: boolean,
 }
@@ -44,4 +45,9 @@ export interface TodoFormProps {
 export interface PomodoroTimerFormHandlerProps {
   intervals: number,
   isLong: boolean,
+}
+
+export interface TodoListCreateTodoHandlerProps {
+  name: string,
+  isComplete: boolean,
 }

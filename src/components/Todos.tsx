@@ -8,24 +8,24 @@ export default function Todos({
   onUpdateTodo,
   todos,
 }: TodosProps) {
-  const completeTodoHandler = useCallback((todoName: string) => () => {
-    onCompleteTodo(todoName);
+  const completeTodoHandler = useCallback((todoId: string) => () => {
+    onCompleteTodo(todoId);
   }, [onCompleteTodo]);
 
-  const deleteTodoHandler = useCallback((todoName: string) => () => {
-    onCompleteTodo(todoName);
+  const deleteTodoHandler = useCallback((todoId: string) => () => {
+    onDeleteTodo(todoId);
   }, [onDeleteTodo]);
 
-  const updateTodoHandler = useCallback((prevTodoName: string) => (newTodoName: string) => {
-    onUpdateTodo(prevTodoName, newTodoName);
+  const updateTodoHandler = useCallback((todoId: string) => (newTodoName: string) => {
+    onUpdateTodo(todoId, newTodoName);
   }, [onUpdateTodo]);
 
   return todos.map((todo) => (
     <Todo
-      key={todo.name}
-      onComplete={completeTodoHandler(todo.name)}
-      onDelete={deleteTodoHandler(todo.name)}
-      onUpdate={updateTodoHandler(todo.name)}
+      key={todo.id}
+      onComplete={completeTodoHandler(todo.id)}
+      onDelete={deleteTodoHandler(todo.id)}
+      onUpdate={updateTodoHandler(todo.id)}
       todo={todo}
     />
   ));

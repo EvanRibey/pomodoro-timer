@@ -1,25 +1,27 @@
 import { useCallback, useState } from 'react';
 import './TodoList.less';
-import { TodoItem } from '../constants/types';
+import { nanoid } from 'nanoid';
+import { TodoItem, TodoListCreateTodoHandlerProps } from '../constants/types';
 import Todos from './Todos';
 import TodoForm from './TodoForm';
+import { POMO_FORM_DEFAULT_TASKS } from '../constants';
 
 export default function TodoList() {
-  const [todos, setTodos] = useState<TodoItem[]>([]);
+  const [todos, setTodos] = useState<TodoItem[]>(POMO_FORM_DEFAULT_TASKS);
 
-  const completeTodoHandler = useCallback((todoName: string) => {
+  const completeTodoHandler = useCallback((todoId: string) => {
     setTodos((prevTodos) => prevTodos.map((todo) => {
-      if (todo.name !== todoName) return todo;
+      if (todo.id !== todoId) return todo;
       return {
         ...todo,
-        isComplete: true,
+        isComplete: !todo.isComplete,
       };
     }));
   }, []);
 
-  const updateTodoHandler = useCallback((prevTodoName: string, newTodoName: string) => {
+  const updateTodoHandler = useCallback((todoId: string, newTodoName: string) => {
     setTodos((prevTodos) => prevTodos.map((todo) => {
-      if (todo.name !== prevTodoName) return todo;
+      if (todo.id !== todoId) return todo;
       return {
         ...todo,
         name: newTodoName,
@@ -27,16 +29,17 @@ export default function TodoList() {
     }));
   }, []);
 
-  const deleteTodoHandler = useCallback((todoName: string) => {
-    setTodos((prevTodos) => prevTodos.filter(todo => todo.name === todoName));
+  const deleteTodoHandler = useCallback((todoId: string) => {
+    setTodos((prevTodos) => prevTodos.filter(todo => todo.id !== todoId));
   }, []);
 
-  const createTodoHandler = useCallback((todoItem: string) => {
+  const createTodoHandler = useCallback(({ name, isComplete }: TodoListCreateTodoHandlerProps) => {
     setTodos((prevTodos) => ([
       ...prevTodos,
       {
-        name: todoItem,
-        isComplete: false,
+        id: nanoid(),
+        name,
+        isComplete,
       },
     ]));
   }, []);
