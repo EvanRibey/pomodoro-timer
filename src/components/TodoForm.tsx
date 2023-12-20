@@ -28,6 +28,7 @@ export default function TodoForm({
   return (
     <div className="todo-form">
       <Checkbox
+        classes={{ root: 'checkbox', colorPrimary: 'primary', checked: 'checked' }}
         onChange={updateTodoCompleteHandler}
         checked={isComplete}
       />
