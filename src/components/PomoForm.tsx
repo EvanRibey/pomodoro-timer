@@ -40,6 +40,7 @@ export default function PomoForm({ onSubmitForm }: PomoFormProps) {
 
   return (
     <form
+      autoComplete="off"
       className="pomo-form"
       onSubmit={formSubmitHandler}
     >
