@@ -16,7 +16,11 @@ export default function TodoForm({ onCreateTodo }: TodoFormProps) {
   }, [onCreateTodo]);
 
   return (
-    <form onSubmit={submitFormHandler} className="todo-form">
+    <form
+      autoComplete="off"
+      className="todo-form"
+      onSubmit={submitFormHandler}
+    >
       <Checkbox
         classes={{ root: 'checkbox', colorPrimary: 'primary', checked: 'checked' }}
         name="isComplete"

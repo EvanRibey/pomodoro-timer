@@ -3,6 +3,9 @@ export const QUEUE_TYPE_FOCUS = 'focus';
 export const QUEUE_TYPE_BREAK = 'break';
 export const QUEUE_TYPE_BREAK_LONG = 'longBreak';
 
+// storage keys
+export const STORAGE_KEY_TODO_LIST = 'todoListItems';
+
 // form names
 export const TODO_FORM_NAME_CHECKBOX = 'isComplete';
 export const TODO_FORM_NAME_TEXTFIELD = 'name';
