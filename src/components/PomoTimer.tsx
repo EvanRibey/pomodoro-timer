@@ -1,6 +1,6 @@
-import './PomoTimer.less';
-import soundEffect from '../assets/countdown-sound-effect.mp3';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { IconButton } from '@mui/material';
+import { StopCircle } from '@mui/icons-material';
 import PomoWorker from '../workers/pomotimer.worker.js?worker';
 import { PomoTimerProps, QueueItem } from '../constants/types';
 import { minutesToSeconds } from '../utils/timerHelpers';
@@ -18,6 +18,8 @@ import {
   QUEUE_TYPE_BREAK_LONG,
   QUEUE_TYPE_FOCUS,
 } from '../constants';
+import './PomoTimer.less';
+import soundEffect from '../assets/countdown-sound-effect.mp3';
 
 export default function PomoTimer({
   queue,
@@ -42,6 +44,10 @@ export default function PomoTimer({
       onTimerEnd();
     }
   }, [onTimerStart, remainingQueue]);
+
+  const clickStopButtonHandler = useCallback(() => {
+    onTimerEnd();
+  }, [onTimerEnd]);
 
   useEffect(() => {
     const workerInstance = new PomoWorker();
@@ -103,6 +109,13 @@ export default function PomoTimer({
       <h2 className="title">{title}</h2>
       <p className="description">{descriptor}</p>
       <p className="timer">{minutes}:{seconds}</p>
+      <IconButton
+        aria-label="stop timer"
+        classes={{ root: 'stop-button' }}
+        onClick={clickStopButtonHandler}
+      >
+        <StopCircle />
+      </IconButton>
     </div>
   );
 }
