@@ -28,4 +28,3 @@ export const POMODORO_TIMER_LONG_MULTIPLIER = 2;
 export const POMODORO_TIMER_HEIGHT = 292; // accounts for border size of parent
 
 export const MINUTES_IN_SECOND = 60;
-export const MILLISECONDS_IN_SECOND = 1000;
