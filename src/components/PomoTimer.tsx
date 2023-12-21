@@ -40,8 +40,6 @@ export default function PomoTimer({
       onTimerStart(nextQueueItem);
       setRemainingQueue([...rest]);
       setCountdownTime(minutesToSeconds(nextQueueItem.duration));
-    } else {
-      onTimerEnd();
     }
   }, [onTimerStart, remainingQueue]);
 
@@ -77,6 +75,12 @@ export default function PomoTimer({
       };
     }
   }, [soundEffectAudio, setNextItem, serviceWorker]);
+
+  useEffect(() => {
+    if (!remainingQueue.length && !countdownTime) {
+      onTimerEnd();
+    }
+  }, [remainingQueue, countdownTime]);
 
   const { type, duration } = currentTimer;
   const sandHeight = POMODORO_TIMER_HEIGHT * countdownTime / minutesToSeconds(duration);

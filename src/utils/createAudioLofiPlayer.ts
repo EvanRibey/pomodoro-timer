@@ -1,8 +1,8 @@
 import { Song } from '../constants/types';
 import { LOFI_PLAYER_TRACKS } from '../constants/lofi-tracks';
 
-export default function createAudioLofiPlayer(track: Song | null, callback: Function): HTMLAudioElement {
-  const newPlayer = new Audio(track?.url || LOFI_PLAYER_TRACKS[0].url);
+export default function createAudioLofiPlayer(track: Song, callback: Function): HTMLAudioElement {
+  const newPlayer = new Audio(track.url);
   newPlayer.volume = 0.75;
 
   newPlayer.addEventListener('ended', () => {

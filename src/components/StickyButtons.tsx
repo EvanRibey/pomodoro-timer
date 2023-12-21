@@ -19,7 +19,7 @@ export default function StickyButtons() {
   const [player, setPlayer] = useState<HTMLAudioElement | null>(null);
 
   const createLofiPlayer = useCallback((trackName: string | null = null) => {
-    const track = LOFI_PLAYER_TRACKS.find(({ name }) => name === trackName) || LOFI_PLAYER_TRACKS[0];
+    const track = LOFI_PLAYER_TRACKS.find(({ name }) => name === trackName) || LOFI_PLAYER_TRACKS[23];
     const newPlayer = createAudioLofiPlayer(track, createLofiPlayer);
 
     setCurrentTrack(track);

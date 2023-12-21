@@ -8,7 +8,7 @@ export default function PomodoroTimer() {
   const [queueList, setQueueList] = useState<QueueItem[]>([]);
 
   const removeAllBodyStyles = useCallback(() => {
-    document.body.classList.remove('focus', 'break', 'break-long');
+    document.body.classList.remove('focus', 'break', 'longBreak');
   }, []);
 
   const timerStartHandler = useCallback((timer: QueueItem) => {
