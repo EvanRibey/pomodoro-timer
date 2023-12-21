@@ -3,7 +3,7 @@ import { PlayArrow, Pause, PlayDisabled } from '@mui/icons-material';
 import { useState, useCallback } from 'react';
 import { LOFI_PLAYER_TRACKS } from '../constants/lofi-tracks';
 import { Song } from '../constants/types';
-import createAudioLofiPlayer from '../utils/createAudioLofiPlayer';
+import { createAudioLofiPlayer, getRandomSongIndex } from '../utils/songUtils';
 import {
   LOFI_BUTTON_ARIA_LABEL,
   LOFI_BUTTON_TOOLTIP_FIRST_TIME_PLAY,
@@ -19,7 +19,7 @@ export default function StickyButtons() {
   const [player, setPlayer] = useState<HTMLAudioElement | null>(null);
 
   const createLofiPlayer = useCallback((trackName: string | null = null) => {
-    const track = LOFI_PLAYER_TRACKS.find(({ name }) => name === trackName) || LOFI_PLAYER_TRACKS[23];
+    const track = LOFI_PLAYER_TRACKS.find(({ name }) => name === trackName) || LOFI_PLAYER_TRACKS[getRandomSongIndex()];
     const newPlayer = createAudioLofiPlayer(track, createLofiPlayer);
 
     setCurrentTrack(track);

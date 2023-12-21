@@ -1,7 +1,7 @@
 import { Song } from '../constants/types';
 import { LOFI_PLAYER_TRACKS } from '../constants/lofi-tracks';
 
-export default function createAudioLofiPlayer(track: Song, callback: Function): HTMLAudioElement {
+export function createAudioLofiPlayer(track: Song, callback: Function): HTMLAudioElement {
   const newPlayer = new Audio(track.url);
   newPlayer.volume = 0.75;
 
@@ -18,4 +18,8 @@ export default function createAudioLofiPlayer(track: Song, callback: Function): 
   });
 
   return newPlayer;
+}
+
+export function getRandomSongIndex(): number {
+  return Math.floor(Math.random() * (LOFI_PLAYER_TRACKS.length - 1));
 }
