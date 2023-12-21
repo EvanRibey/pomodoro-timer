@@ -29,7 +29,8 @@ export default function PomoForm({ onSubmitForm }: PomoFormProps) {
     setIsLongPomoChecked(event.target.checked);
   }, []);
 
-  const formSubmitHandler = useCallback(() => {
+  const formSubmitHandler = useCallback((event: React.SyntheticEvent<HTMLFormElement>) => {
+    event.preventDefault();
     onSubmitForm({
       intervals: numberPomodoros,
       isLong: isLongPomoChecked,
