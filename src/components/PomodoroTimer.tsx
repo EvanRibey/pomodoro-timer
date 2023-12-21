@@ -3,6 +3,7 @@ import generateQueueList from '../utils/generateQueueList';
 import { PomodoroTimerFormHandlerProps, QueueItem } from '../constants/types';
 import PomoForm from './PomoForm';
 import PomoTimer from './PomoTimer';
+import './PomodoroTimer.less';
 
 export default function PomodoroTimer() {
   const [queueList, setQueueList] = useState<QueueItem[]>([]);
@@ -31,7 +32,7 @@ export default function PomodoroTimer() {
   const isFormShowing = !queueList.length;
 
   return (
-    <div>
+    <div className="pomodoro-timer">
       {!!queueList.length && (
         <PomoTimer 
           queue={queueList}
