@@ -77,7 +77,7 @@ export default function StickyButtons() {
       </div>
       {currentTrack && isPlaying && (
         <div className="lofi-player-information">
-          <p className="paragraph">{currentTrack.name} - {currentTrack.artist}</p>
+          <p className="paragraph">{currentTrack.artist} - {currentTrack.name}</p>
           <p className="paragraph">{LOFI_GIRL_CREDIT}</p>
         </div>
       )}
