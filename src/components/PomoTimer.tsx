@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { IconButton } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 import { StopCircle } from '@mui/icons-material';
 import PomoWorker from '../workers/pomotimer.worker.js?worker';
 import { PomoTimerProps, QueueItem } from '../constants/types';
@@ -14,6 +14,8 @@ import {
   POMO_STATE_TITLE_BREAK,
   POMO_STATE_TITLE_BREAK_LONG,
   POMO_STATE_TITLE_FOCUS,
+  POMO_TIMER_ARIA_LABEL,
+  POMO_TIMER_TOOLTIP_STOP,
   QUEUE_TYPE_BREAK,
   QUEUE_TYPE_BREAK_LONG,
   QUEUE_TYPE_FOCUS,
@@ -113,14 +115,16 @@ export default function PomoTimer({
       <h2 className="title">{title}</h2>
       <p className="description">{descriptor}</p>
       <p className="timer">{minutes}:{seconds}</p>
-      <IconButton
-        aria-label="stop timer"
-        classes={{ root: 'stop-button' }}
-        color="primary"
-        onClick={clickStopButtonHandler}
-      >
-        <StopCircle />
-      </IconButton>
+      <Tooltip title={POMO_TIMER_TOOLTIP_STOP}>
+        <IconButton
+          aria-label={POMO_TIMER_ARIA_LABEL}
+          classes={{ root: 'stop-button' }}
+          color="primary"
+          onClick={clickStopButtonHandler}
+        >
+          <StopCircle />
+        </IconButton>
+      </Tooltip>
     </div>
   );
 }
