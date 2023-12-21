@@ -64,8 +64,17 @@ export default function StickyButtons() {
   }, [isPlaying]);
 
   return (
-    <>
-      <div className="sticky-buttons">
+    <div className="sticky-buttons">
+        <div className="lofi-player-information">
+
+      {currentTrack && isPlaying && (
+          <>
+          <p className="paragraph">{currentTrack.artist} - {currentTrack.name}</p>
+          <p className="paragraph">{LOFI_GIRL_CREDIT}</p>
+          </>
+      )}
+        </div>
+      <div className="buttons">
         <Tooltip title={renderLofiPlayerTooltipTitle()}>
           <IconButton
             aria-label={LOFI_BUTTON_ARIA_LABEL}
@@ -75,12 +84,6 @@ export default function StickyButtons() {
           </IconButton>
         </Tooltip>
       </div>
-      {currentTrack && isPlaying && (
-        <div className="lofi-player-information">
-          <p className="paragraph">{currentTrack.artist} - {currentTrack.name}</p>
-          <p className="paragraph">{LOFI_GIRL_CREDIT}</p>
-        </div>
-      )}
-    </>
+    </div>
   );
 }

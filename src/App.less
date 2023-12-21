@@ -1,0 +1,51 @@
+body {
+  background-color: white;
+  transition: background-color 0.2s;
+
+  @media screen and (max-width: 912px) {
+    .sticky-buttons {
+      background-color: white;
+    }
+  }
+
+  &.break {
+    background-color: #18b6e7;
+
+    @media screen and (max-width: 912px) {
+      .sticky-buttons {
+        background-color: #18b6e7;
+      }
+    }
+  }
+
+  &.longBreak {
+    background-color: #18b6e7;
+
+    @media screen and (max-width: 912px) {
+      .sticky-buttons {
+        background-color: #18b6e7;
+      }
+    }
+  }
+
+  &.focus {
+    background-color: #2bd48e;
+
+    @media screen and (max-width: 912px) {
+      .sticky-buttons {
+        background-color: #2bd48e;
+      }
+    }
+  }
+}
+
+#root {
+  width: 100%;
+  text-align: center;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.center-container {
+  margin: 0 auto;
+  max-width: 360px;
+}
