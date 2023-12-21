@@ -10,6 +10,13 @@ export interface TodoItem {
   isComplete: boolean,
 }
 
+export interface Song {
+  name: string,
+  artist: string,
+  album: string,
+  url: string,
+}
+
 export type Nullish = null | undefined;
 
 // Component PropTypes
