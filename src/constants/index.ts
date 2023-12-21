@@ -25,6 +25,13 @@ export const POMO_FORM_HELPER_LONG_CYCLES = 'A long cycle is 50 mins of focus fo
 
 export const TODO_FORM_HELPER_TEXT_FIELD = 'Return ⏎ to add to list';
 
+export const LOFI_BUTTON_TOOLTIP_PAUSE = 'Pause Music';
+export const LOFI_BUTTON_TOOLTIP_PLAY = 'Play Music';
+export const LOFI_BUTTON_TOOLTIP_FIRST_TIME_PLAY = 'Play Lofi Girl Music';
+export const LOFI_BUTTON_ARIA_LABEL = 'play lofi music';
+
+export const LOFI_GIRL_CREDIT = 'Provided by Lofi Girl';
+
 // magic numbers
 export const POMODORO_INITIAL_INTERVAL = 4;
 

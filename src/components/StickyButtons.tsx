@@ -4,6 +4,13 @@ import { useState, useCallback } from 'react';
 import { LOFI_PLAYER_TRACKS } from '../constants/lofi-tracks';
 import { Song } from '../constants/types';
 import createAudioLofiPlayer from '../utils/createAudioLofiPlayer';
+import {
+  LOFI_BUTTON_ARIA_LABEL,
+  LOFI_BUTTON_TOOLTIP_FIRST_TIME_PLAY,
+  LOFI_BUTTON_TOOLTIP_PAUSE,
+  LOFI_BUTTON_TOOLTIP_PLAY,
+  LOFI_GIRL_CREDIT,
+} from '../constants';
 import './StickyButtons.less';
 
 export default function StickyButtons() {
@@ -11,9 +18,9 @@ export default function StickyButtons() {
   const [currentTrack, setCurrentTrack] = useState<Song | null>(null);
   const [player, setPlayer] = useState<HTMLAudioElement | null>(null);
 
-  const createPlayer = useCallback((trackName: string | null = null) => {
+  const createLofiPlayer = useCallback((trackName: string | null = null) => {
     const track = LOFI_PLAYER_TRACKS.find(({ name }) => name === trackName) || LOFI_PLAYER_TRACKS[0];
-    const newPlayer = createAudioLofiPlayer(track, createPlayer);
+    const newPlayer = createAudioLofiPlayer(track, createLofiPlayer);
 
     setCurrentTrack(track);
     setPlayer(newPlayer);
@@ -22,7 +29,7 @@ export default function StickyButtons() {
   const clickLofiPlayerHandler = useCallback(() => {
     setIsPlaying((prevValue) => {
       if (!prevValue && player === null) {
-        createPlayer();
+        createLofiPlayer();
       } else if(!prevValue) {
         player?.play();
       } else {
@@ -30,9 +37,9 @@ export default function StickyButtons() {
       }
       return !prevValue;
     });
-  }, [createPlayer, player]);
+  }, [createLofiPlayer, player]);
 
-  const renderIcon = useCallback(() => {
+  const renderLofiPlayerIcon = useCallback(() => {
     switch (isPlaying) {
       case true:
         return <Pause />;
@@ -44,34 +51,34 @@ export default function StickyButtons() {
     }
   }, [isPlaying]);
 
-  const renderTooltipTitle = useCallback(() => {
+  const renderLofiPlayerTooltipTitle = useCallback(() => {
     switch (isPlaying) {
       case true:
-        return 'Pause Music';
+        return LOFI_BUTTON_TOOLTIP_PAUSE;
       case false:
-        return 'Play Music';
+        return LOFI_BUTTON_TOOLTIP_PLAY;
       case null:
       default:
-        return 'Play Lofi Girl Music';
+        return LOFI_BUTTON_TOOLTIP_FIRST_TIME_PLAY;
     }
   }, [isPlaying]);
 
   return (
     <>
       <div className="sticky-buttons">
-        <Tooltip title={renderTooltipTitle()}>
+        <Tooltip title={renderLofiPlayerTooltipTitle()}>
           <IconButton
-            aria-label="play lofi music"
+            aria-label={LOFI_BUTTON_ARIA_LABEL}
             onClick={clickLofiPlayerHandler}
           >
-            {renderIcon()}
+            {renderLofiPlayerIcon()}
           </IconButton>
         </Tooltip>
       </div>
       {currentTrack && isPlaying && (
         <div className="lofi-player-information">
           <p className="paragraph">{currentTrack.name} - {currentTrack.artist}</p>
-          <p className="paragraph">Provided by Lofi Girl</p>
+          <p className="paragraph">{LOFI_GIRL_CREDIT}</p>
         </div>
       )}
     </>
