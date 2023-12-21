@@ -54,6 +54,7 @@ export default function PomoForm({ onSubmitForm }: PomoFormProps) {
         value={numberPomodoros}
       />
       <FormControlLabel
+        classes={{ root: 'long-switch-label' }}
         control={
           <Switch
             checked={isLongPomoChecked}
