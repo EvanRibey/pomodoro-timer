@@ -3,13 +3,15 @@ import { theme } from './utils/customMUITheme'
 import PomodoroTimer from './components/PomodoroTimer'
 import TodoList from './components/TodoList'
 import StickyButtons from './components/StickyButtons'
-import './App.css'
+import './App.less'
 
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
-      <PomodoroTimer />
-      <TodoList />
+      <div className="center-container">
+        <PomodoroTimer />
+        <TodoList />
+      </div>
       <StickyButtons />
     </ThemeProvider>
   )

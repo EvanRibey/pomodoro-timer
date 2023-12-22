@@ -1,5 +1,4 @@
 import { useState, useCallback } from 'react';
-import classNames from 'classnames';
 import {
   Button,
   FormControlLabel,
@@ -60,7 +59,7 @@ export default function PomoForm({ onSubmitForm }: PomoFormProps) {
         value={numberPomodoros}
       />
       <FormControlLabel
-        classes={{ root: classNames({ 'long-switch': !isLongPomoChecked }) }}
+        classes={{ root: 'long-switch-label' }}
         control={
           <Switch
             checked={isLongPomoChecked}
@@ -70,9 +69,7 @@ export default function PomoForm({ onSubmitForm }: PomoFormProps) {
         }
         label={POMO_FORM_LABEL_LONG_CYCLES}
       />
-      {isLongPomoChecked && (
-        <FormHelperText classes={{ root: 'long-switch' }}>{POMO_FORM_HELPER_LONG_CYCLES}</FormHelperText>
-      )}
+      <FormHelperText classes={{ root: 'long-switch' }}>{POMO_FORM_HELPER_LONG_CYCLES}</FormHelperText>
       <Button variant="contained" type="submit">Start timer</Button>
     </form>
   );

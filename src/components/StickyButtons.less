@@ -1,13 +1,16 @@
 .sticky-buttons {
   position: fixed;
-  bottom: 16px;
-  right: 16px;
+  bottom: 0;
+  padding: 16px 16px 8px;
+  width: calc(100% - 32px);
+  display: flex;
+  justify-content: space-between;
+  box-sizing: content-box;
+  min-height: 52px;
 }
 
 .lofi-player-information {
-  position: fixed;
-  bottom: 16px;
-  left: 16px;
+  color: black;
 
   .paragraph {
     font-size: 14px;
