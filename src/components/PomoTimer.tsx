@@ -6,7 +6,6 @@ import { PomoTimerProps, QueueItem } from '../constants/types';
 import { minutesToSeconds } from '../utils/timerHelpers';
 import formatToTwoNumbers from '../utils/numberHelpers';
 import {
-  APP_TITLE,
   APP_TITLE_BREAK,
   APP_TITLE_BREAK_LONG,
   APP_TITLE_FOCUS,
