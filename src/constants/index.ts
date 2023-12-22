@@ -35,6 +35,10 @@ export const LOFI_BUTTON_TOOLTIP_PLAY = 'Play Music';
 export const LOFI_BUTTON_TOOLTIP_FIRST_TIME_PLAY = 'Play Lofi Girl Music';
 export const LOFI_BUTTON_ARIA_LABEL = 'play lofi music';
 
+export const GITHUB_BUTTON_ARIA_LABEL = 'open Github project';
+export const GITHUB_BUTTON_HREF = 'https://github.com/EvanRibey/pomodoro-timer';
+export const GITHUB_BUTTON_TOOLTIP = 'Follow My Github Project';
+
 export const LOFI_GIRL_CREDIT = 'Provided by Lofi Girl';
 
 // magic numbers

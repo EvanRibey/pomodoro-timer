@@ -1,10 +1,13 @@
 import { useState, useCallback, useEffect } from 'react';
 import { IconButton, Tooltip } from '@mui/material';
-import { PlayArrow, Pause, PlayDisabled } from '@mui/icons-material';
+import { PlayArrow, Pause, PlayDisabled, GitHub } from '@mui/icons-material';
 import { LOFI_PLAYER_TRACKS } from '../constants/lofi-tracks';
 import { Song } from '../constants/types';
 import { createAudioLofiPlayer, getRandomSongIndex } from '../utils/songUtils';
 import {
+  GITHUB_BUTTON_ARIA_LABEL,
+  GITHUB_BUTTON_HREF,
+  GITHUB_BUTTON_TOOLTIP,
   LOFI_BUTTON_ARIA_LABEL,
   LOFI_BUTTON_TOOLTIP_FIRST_TIME_PLAY,
   LOFI_BUTTON_TOOLTIP_PAUSE,
@@ -76,15 +79,14 @@ export default function StickyButtons() {
 
   return (
     <div className="sticky-buttons">
-        <div className="lofi-player-information">
-
-      {currentTrack && isPlaying && (
+      <div className="lofi-player-information">
+        {currentTrack && isPlaying && (
           <>
-          <p className="paragraph">{currentTrack.artist} - {currentTrack.name}</p>
-          <p className="paragraph">{LOFI_GIRL_CREDIT}</p>
+            <p className="paragraph">{currentTrack.artist} - {currentTrack.name}</p>
+            <p className="paragraph">{LOFI_GIRL_CREDIT}</p>
           </>
-      )}
-        </div>
+        )}
+      </div>
       <div className="buttons">
         <Tooltip title={renderLofiPlayerTooltipTitle()}>
           <IconButton
@@ -92,6 +94,15 @@ export default function StickyButtons() {
             onClick={clickLofiPlayerHandler}
           >
             {renderLofiPlayerIcon()}
+          </IconButton>
+        </Tooltip>
+        <Tooltip title={GITHUB_BUTTON_TOOLTIP}>
+          <IconButton
+            aria-label={GITHUB_BUTTON_ARIA_LABEL}
+            href={GITHUB_BUTTON_HREF}
+            target="_blank"
+          >
+            <GitHub />
           </IconButton>
         </Tooltip>
       </div>
