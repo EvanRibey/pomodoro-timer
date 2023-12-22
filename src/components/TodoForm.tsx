@@ -7,11 +7,13 @@ import './TodoForm.less';
 export default function TodoForm({ onCreateTodo }: TodoFormProps) {
   const submitFormHandler = useCallback((event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     const formData = new FormData(event.currentTarget);
     onCreateTodo({
       name: formData.get(TODO_FORM_NAME_TEXTFIELD),
       isComplete: formData.get(TODO_FORM_NAME_CHECKBOX) === 'on',
     });
+
     event.currentTarget.reset();
   }, [onCreateTodo]);
 
