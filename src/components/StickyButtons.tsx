@@ -1,6 +1,6 @@
+import { useState, useCallback, useEffect } from 'react';
 import { IconButton, Tooltip } from '@mui/material';
 import { PlayArrow, Pause, PlayDisabled } from '@mui/icons-material';
-import { useState, useCallback } from 'react';
 import { LOFI_PLAYER_TRACKS } from '../constants/lofi-tracks';
 import { Song } from '../constants/types';
 import { createAudioLofiPlayer, getRandomSongIndex } from '../utils/songUtils';
@@ -11,12 +11,15 @@ import {
   LOFI_BUTTON_TOOLTIP_PLAY,
   LOFI_GIRL_CREDIT,
 } from '../constants';
+import usePrevious from '../utils/usePrevious';
 import './StickyButtons.less';
 
 export default function StickyButtons() {
   const [isPlaying, setIsPlaying] = useState<boolean | null>(null);
   const [currentTrack, setCurrentTrack] = useState<Song | null>(null);
   const [player, setPlayer] = useState<HTMLAudioElement | null>(null);
+
+  const prevIsPlaying = usePrevious(isPlaying);
 
   const createLofiPlayer = useCallback((trackName: string | null = null) => {
     const track = LOFI_PLAYER_TRACKS.find(({ name }) => name === trackName) || LOFI_PLAYER_TRACKS[getRandomSongIndex()];
@@ -27,17 +30,25 @@ export default function StickyButtons() {
   }, []);
 
   const clickLofiPlayerHandler = useCallback(() => {
-    setIsPlaying((prevValue) => {
-      if (!prevValue && player === null) {
-        createLofiPlayer();
-      } else if(!prevValue) {
-        player?.play();
-      } else {
-        player?.pause();
-      }
-      return !prevValue;
-    });
-  }, [createLofiPlayer, player]);
+    setIsPlaying((prevValue) => !prevValue);
+  }, []);
+
+  useEffect(() => {
+    if (player === null && isPlaying) {
+      createLofiPlayer();
+    }
+
+    if (player && isPlaying && !prevIsPlaying) {
+      player.play();
+    } else if (player && !isPlaying && prevIsPlaying) {
+      player.pause();
+    }
+  }, [
+    createLofiPlayer,
+    isPlaying,
+    player,
+    prevIsPlaying,
+  ]);
 
   const renderLofiPlayerIcon = useCallback(() => {
     switch (isPlaying) {

@@ -9,6 +9,8 @@ export const STORAGE_KEY_TODO_LIST = 'todoListItems';
 // form names
 export const TODO_FORM_NAME_CHECKBOX = 'isComplete';
 export const TODO_FORM_NAME_TEXTFIELD = 'name';
+export const POMO_FORM_NAME_TEXTFIELD = 'interval-timer';
+export const POMO_FORM_NAME_CHECKBOX = 'is-long-pomo-checked';
 
 // string descriptions, taken out for code read-ability
 export const POMO_STATE_TITLE_BREAK = 'Break Time';

@@ -1,10 +1,11 @@
-import { useCallback, useMemo, useState } from 'react';
-import './TodoList.less';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { nanoid } from 'nanoid';
+import { POMO_FORM_DEFAULT_TASKS, STORAGE_KEY_TODO_LIST } from '../constants';
 import { TodoItem, TodoListCreateTodoHandlerProps } from '../constants/types';
+import usePrevious from '../utils/usePrevious';
 import Todos from './Todos';
 import TodoForm from './TodoForm';
-import { POMO_FORM_DEFAULT_TASKS, STORAGE_KEY_TODO_LIST } from '../constants';
+import './TodoList.less';
 
 export default function TodoList() {
   const initialTodoItems = useMemo(() => {
@@ -15,66 +16,52 @@ export default function TodoList() {
 
   const [todos, setTodos] = useState<TodoItem[]>(initialTodoItems || POMO_FORM_DEFAULT_TASKS);
 
+  const prevTodos = usePrevious(todos);
+
   const setStorage = useCallback((newTodos: TodoItem[]) => {
     localStorage.setItem(STORAGE_KEY_TODO_LIST, JSON.stringify(newTodos));
   }, []);
 
   const completeTodoHandler = useCallback((todoId: string) => {
-    setTodos((prevTodos) => {
-      const newTodos = prevTodos.map((todo) => {
-        if (todo.id !== todoId) return todo;
-        return {
-          ...todo,
-          isComplete: !todo.isComplete,
-        };
-      });
-
-      setStorage(newTodos);
-
-      return newTodos;
-    });
-  }, [setStorage]);
+    setTodos((prevTodos) => prevTodos.map((todo) => {
+      if (todo.id !== todoId) return todo;
+      return {
+        ...todo,
+        isComplete: !todo.isComplete,
+      };
+    }));
+  }, []);
 
   const updateTodoHandler = useCallback((todoId: string, newTodoName: string) => {
-    setTodos((prevTodos) => {
-      const newTodos = prevTodos.map((todo) => {
-        if (todo.id !== todoId) return todo;
-        return {
-          ...todo,
-          name: newTodoName,
-        };
-      });
-
-      setStorage(newTodos);
-
-      return newTodos;
-    });
-  }, [setStorage]);
+    setTodos((prevTodos) => prevTodos.map((todo) => {
+      if (todo.id !== todoId) return todo;
+      return {
+        ...todo,
+        name: newTodoName,
+      };
+    }));
+  }, []);
 
   const deleteTodoHandler = useCallback((todoId: string) => {
-    setTodos((prevTodos) => {
-      const newTodos = prevTodos.filter(todo => todo.id !== todoId)
-
-      setStorage(newTodos);
-
-      return newTodos;
-    });
+    setTodos((prevTodos) => prevTodos.filter(todo => todo.id !== todoId));
   }, []);
 
   const createTodoHandler = useCallback(({ name, isComplete }: TodoListCreateTodoHandlerProps) => {
-    setTodos((prevTodos) => {
-      const newTodos = [
-        ...prevTodos,
-        {
-          id: nanoid(),
-          name,
-          isComplete,
-        },
-      ];
-      setStorage(newTodos);
-      return newTodos;
-    });
-  }, [setStorage]);
+    setTodos((prevTodos) => ([
+      ...prevTodos,
+      {
+        id: nanoid(),
+        name,
+        isComplete,
+      },
+    ]));
+  }, []);
+
+  useEffect(() => {
+    if (todos !== prevTodos) {
+      setStorage(todos);
+    }
+  }, [prevTodos, setStorage, todos]);
 
   return (
     <div className="todo-list">
