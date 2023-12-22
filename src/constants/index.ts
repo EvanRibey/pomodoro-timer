@@ -52,3 +52,8 @@ export const MINUTES_IN_SECOND = 60;
 
 // initial values
 export const POMO_FORM_DEFAULT_TASKS = [{ id: 'default', name: 'Make todo list', isComplete: true }];
+
+export const APP_TITLE = 'Pomodoro Timer';
+export const APP_TITLE_FOCUS = `Focus - ${APP_TITLE}`;
+export const APP_TITLE_BREAK = `Break - ${APP_TITLE}`;
+export const APP_TITLE_BREAK_LONG = `Long Break - ${APP_TITLE}`;
