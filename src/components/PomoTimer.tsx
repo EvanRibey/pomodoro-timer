@@ -6,6 +6,10 @@ import { PomoTimerProps, QueueItem } from '../constants/types';
 import { minutesToSeconds } from '../utils/timerHelpers';
 import formatToTwoNumbers from '../utils/numberHelpers';
 import {
+  APP_TITLE,
+  APP_TITLE_BREAK,
+  APP_TITLE_BREAK_LONG,
+  APP_TITLE_FOCUS,
   MINUTES_IN_SECOND,
   POMODORO_TIMER_HEIGHT,
   POMO_STATE_DESCRIPTION_BREAK,
@@ -32,6 +36,10 @@ export default function PomoTimer({
   const [currentTimer, setCurrentTimer] = useState<QueueItem>(queue[0]);
   const [remainingQueue, setRemainingQueue] = useState<QueueItem[]>(queue.slice(1));
   const [countdownTime, setCountdownTime] = useState(minutesToSeconds(queue[0].duration));
+
+  const { type: countdownType, duration: countdownDuration } = currentTimer;
+  const minutes = Math.floor(countdownTime / MINUTES_IN_SECOND);
+  const seconds = formatToTwoNumbers(countdownTime - minutes * MINUTES_IN_SECOND);
 
   const soundEffectAudio = useMemo(() => new Audio(soundEffect), []);
 
@@ -70,17 +78,33 @@ export default function PomoTimer({
       onTimerStart(nextQueueItem);
     } else if (countdownTime === 3) {
       soundEffectAudio.play();
+    } else {
+      let appTitle = '';
+
+      switch(countdownType) {
+        case QUEUE_TYPE_BREAK:
+          appTitle = APP_TITLE_BREAK;
+          break;
+
+        case QUEUE_TYPE_BREAK_LONG:
+          appTitle = APP_TITLE_BREAK_LONG;
+          break;
+
+        case QUEUE_TYPE_FOCUS:
+        default:
+          appTitle = APP_TITLE_FOCUS;
+          break;
+      }
+
+      document.title = `${minutes}:${seconds} - ${appTitle}`;
     }
   }, [countdownTime, remainingQueue, soundEffectAudio]);
 
-  const { type, duration } = currentTimer;
-  const sandHeight = POMODORO_TIMER_HEIGHT * countdownTime / minutesToSeconds(duration);
-  const minutes = Math.floor(countdownTime / MINUTES_IN_SECOND);
-  const seconds = formatToTwoNumbers(countdownTime - minutes * MINUTES_IN_SECOND);
+  const sandHeight = POMODORO_TIMER_HEIGHT * countdownTime / minutesToSeconds(countdownDuration);
   let title = '';
   let descriptor = '';
 
-  switch(type) {
+  switch(countdownType) {
     case QUEUE_TYPE_BREAK:
       title = POMO_STATE_TITLE_BREAK;
       descriptor = POMO_STATE_DESCRIPTION_BREAK;

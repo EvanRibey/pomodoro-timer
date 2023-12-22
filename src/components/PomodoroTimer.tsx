@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import generateQueueList from '../utils/generateQueueList';
 import { PomodoroTimerFormHandlerProps, QueueItem } from '../constants/types';
+import { APP_TITLE } from '../constants';
 import PomoForm from './PomoForm';
 import PomoTimer from './PomoTimer';
 import './PomodoroTimer.less';
@@ -27,6 +28,7 @@ export default function PomodoroTimer() {
   const timerCompleteHandler = useCallback(() => {
     setQueueList([]);
     removeAllBodyStyles();
+    document.title = APP_TITLE;
   }, [removeAllBodyStyles]);
 
   const isFormShowing = !queueList.length;

@@ -40,9 +40,9 @@ export const LOFI_GIRL_CREDIT = 'Provided by Lofi Girl';
 // magic numbers
 export const POMODORO_INITIAL_INTERVAL = 4;
 
-export const POMODORO_TIMER_FOCUS = 25;
-export const POMODORO_TIMER_BREAK = 5;
-export const POMODORO_TIMER_BREAK_LONG = 15;
+export const POMODORO_TIMER_FOCUS = 0.1;
+export const POMODORO_TIMER_BREAK = 0.1;
+export const POMODORO_TIMER_BREAK_LONG = 0.1;
 
 export const POMODORO_TIMER_LONG_MULTIPLIER = 2;
 
@@ -52,3 +52,8 @@ export const MINUTES_IN_SECOND = 60;
 
 // initial values
 export const POMO_FORM_DEFAULT_TASKS = [{ id: 'default', name: 'Make todo list', isComplete: true }];
+
+export const APP_TITLE = 'Pomodoro Timer';
+export const APP_TITLE_FOCUS = `Focus - ${APP_TITLE}`;
+export const APP_TITLE_BREAK = `Break - ${APP_TITLE}`;
+export const APP_TITLE_BREAK_LONG = `Long Break - ${APP_TITLE}`;
