@@ -31,11 +31,13 @@ export default function PomoForm({ onSubmitForm }: PomoFormProps) {
 
   const formSubmitHandler = useCallback((event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
     onSubmitForm({
-      intervals: numberPomodoros,
-      isLong: isLongPomoChecked,
+      intervals: Number(formData.get('interval-timer')),
+      isLong: formData.get('is-long-pomo-checked') === 'on',
     });
-  }, [isLongPomoChecked, numberPomodoros]);
+  }, []);
 
   const countNote = numberPomodoros >= 4 ? POMO_FORM_HELPER_COUNT : '';
 
@@ -50,6 +52,7 @@ export default function PomoForm({ onSubmitForm }: PomoFormProps) {
         classes={{ root: 'interval-timer' }}
         helperText={countNote}
         label={POMO_FORM_LABEL_COUNT}
+        name="interval-timer"
         onChange={setPomodoroIntervalsHandler}
         type="number"
         value={numberPomodoros}
@@ -59,6 +62,7 @@ export default function PomoForm({ onSubmitForm }: PomoFormProps) {
         control={
           <Switch
             checked={isLongPomoChecked}
+            name="is-long-pomo-checked"
             onChange={changeLongPomoHandler}
           />
         }
