@@ -35,19 +35,10 @@ export default function PomoTimer({
 
   const soundEffectAudio = useMemo(() => new Audio(soundEffect), []);
 
-  const setNextItem = useCallback(() => {
-    if (remainingQueue.length) {
-      const [nextQueueItem, ...rest] = remainingQueue;
-      setCurrentTimer(nextQueueItem)
-      onTimerStart(nextQueueItem);
-      setRemainingQueue([...rest]);
-      setCountdownTime(minutesToSeconds(nextQueueItem.duration));
-    }
-  }, [onTimerStart, remainingQueue]);
-
   const clickStopButtonHandler = useCallback(() => {
+    soundEffectAudio.pause();
     onTimerEnd();
-  }, [onTimerEnd]);
+  }, [soundEffectAudio, onTimerEnd]);
 
   useEffect(() => {
     const workerInstance = new PomoWorker();
@@ -61,28 +52,26 @@ export default function PomoTimer({
   useEffect(() => {
     if (serviceWorker) {
       serviceWorker.onmessage = () => {
-        setCountdownTime((prevCountdownTimer) => {
-          const newTimer = prevCountdownTimer - 1;
-
-          if (newTimer === 3) {
-            soundEffectAudio.play();
-          }
-
-          if (!newTimer) {
-            setNextItem();
-          }
-
-          return newTimer;
-        });
+        setCountdownTime((prevCountdownTimer) => prevCountdownTimer - 1);
       };
     }
-  }, [soundEffectAudio, setNextItem, serviceWorker]);
+  }, [serviceWorker]);
 
   useEffect(() => {
     if (!remainingQueue.length && !countdownTime) {
       onTimerEnd();
+    } else if (remainingQueue.length && !countdownTime) {
+      const [nextQueueItem, ...rest] = remainingQueue;
+
+      setCurrentTimer(nextQueueItem)
+      setRemainingQueue([...rest]);
+      setCountdownTime(minutesToSeconds(nextQueueItem.duration));
+
+      onTimerStart(nextQueueItem);
+    } else if (countdownTime === 3) {
+      soundEffectAudio.play();
     }
-  }, [remainingQueue, countdownTime]);
+  }, [countdownTime, remainingQueue, soundEffectAudio]);
 
   const { type, duration } = currentTimer;
   const sandHeight = POMODORO_TIMER_HEIGHT * countdownTime / minutesToSeconds(duration);

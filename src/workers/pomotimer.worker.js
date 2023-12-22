@@ -1,3 +1,3 @@
 setInterval(() => {
-  postMessage(true);
+  self.postMessage(true);
 }, 1000);
