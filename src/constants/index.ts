@@ -40,9 +40,9 @@ export const LOFI_GIRL_CREDIT = 'Provided by Lofi Girl';
 // magic numbers
 export const POMODORO_INITIAL_INTERVAL = 4;
 
-export const POMODORO_TIMER_FOCUS = 0.1;
-export const POMODORO_TIMER_BREAK = 0.1;
-export const POMODORO_TIMER_BREAK_LONG = 0.1;
+export const POMODORO_TIMER_FOCUS = 25;
+export const POMODORO_TIMER_BREAK = 5;
+export const POMODORO_TIMER_BREAK_LONG = 15;
 
 export const POMODORO_TIMER_LONG_MULTIPLIER = 2;
 
