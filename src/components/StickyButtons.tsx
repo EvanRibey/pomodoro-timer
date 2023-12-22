@@ -1,6 +1,6 @@
+import { useState, useCallback } from 'react';
 import { IconButton, Tooltip } from '@mui/material';
 import { PlayArrow, Pause, PlayDisabled } from '@mui/icons-material';
-import { useState, useCallback } from 'react';
 import { LOFI_PLAYER_TRACKS } from '../constants/lofi-tracks';
 import { Song } from '../constants/types';
 import { createAudioLofiPlayer, getRandomSongIndex } from '../utils/songUtils';

@@ -1,4 +1,3 @@
-import './PomoForm.less';
 import { useState, useCallback } from 'react';
 import classNames from 'classnames';
 import {
@@ -18,6 +17,7 @@ import {
   POMO_FORM_NAME_TEXTFIELD,
 } from '../constants';
 import { PomoFormProps } from '../constants/types';
+import './PomoForm.less';
 
 export default function PomoForm({ onSubmitForm }: PomoFormProps) {
   const [numberPomodoros, setNumberPomodoros] = useState(POMODORO_INITIAL_INTERVAL);

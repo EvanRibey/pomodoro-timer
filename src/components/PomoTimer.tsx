@@ -20,8 +20,8 @@ import {
   QUEUE_TYPE_BREAK_LONG,
   QUEUE_TYPE_FOCUS,
 } from '../constants';
-import './PomoTimer.less';
 import soundEffect from '../assets/countdown-sound-effect.mp3';
+import './PomoTimer.less';
 
 export default function PomoTimer({
   queue,
