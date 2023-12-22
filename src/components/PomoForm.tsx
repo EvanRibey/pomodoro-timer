@@ -14,6 +14,8 @@ import {
   POMO_FORM_HELPER_LONG_CYCLES,
   POMO_FORM_LABEL_COUNT,
   POMO_FORM_LABEL_LONG_CYCLES,
+  POMO_FORM_NAME_CHECKBOX,
+  POMO_FORM_NAME_TEXTFIELD,
 } from '../constants';
 import { PomoFormProps } from '../constants/types';
 
@@ -34,8 +36,8 @@ export default function PomoForm({ onSubmitForm }: PomoFormProps) {
 
     const formData = new FormData(event.currentTarget);
     onSubmitForm({
-      intervals: Number(formData.get('interval-timer')),
-      isLong: formData.get('is-long-pomo-checked') === 'on',
+      intervals: Number(formData.get(POMO_FORM_NAME_TEXTFIELD)),
+      isLong: formData.get(POMO_FORM_NAME_CHECKBOX) === 'on',
     });
   }, []);
 
@@ -52,7 +54,7 @@ export default function PomoForm({ onSubmitForm }: PomoFormProps) {
         classes={{ root: 'interval-timer' }}
         helperText={countNote}
         label={POMO_FORM_LABEL_COUNT}
-        name="interval-timer"
+        name={POMO_FORM_NAME_TEXTFIELD}
         onChange={setPomodoroIntervalsHandler}
         type="number"
         value={numberPomodoros}
@@ -62,7 +64,7 @@ export default function PomoForm({ onSubmitForm }: PomoFormProps) {
         control={
           <Switch
             checked={isLongPomoChecked}
-            name="is-long-pomo-checked"
+            name={POMO_FORM_NAME_CHECKBOX}
             onChange={changeLongPomoHandler}
           />
         }
