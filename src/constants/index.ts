@@ -35,6 +35,10 @@ export const LOFI_BUTTON_TOOLTIP_PLAY = 'Play Music';
 export const LOFI_BUTTON_TOOLTIP_FIRST_TIME_PLAY = 'Play Lofi Girl Music';
 export const LOFI_BUTTON_ARIA_LABEL = 'play lofi music';
 
+export const GITHUB_BUTTON_ARIA_LABEL = 'open Github project';
+export const GITHUB_BUTTON_HREF = 'https://github.com/EvanRibey/pomodoro-timer';
+export const GITHUB_BUTTON_TOOLTIP = 'Follow My Github Project';
+
 export const LOFI_GIRL_CREDIT = 'Provided by Lofi Girl';
 
 // magic numbers
@@ -53,7 +57,8 @@ export const MINUTES_IN_SECOND = 60;
 // initial values
 export const POMO_FORM_DEFAULT_TASKS = [{ id: 'default', name: 'Make todo list', isComplete: true }];
 
-export const APP_TITLE = 'Pomodoro Timer';
-export const APP_TITLE_FOCUS = `Focus - ${APP_TITLE}`;
-export const APP_TITLE_BREAK = `Break - ${APP_TITLE}`;
-export const APP_TITLE_BREAK_LONG = `Long Break - ${APP_TITLE}`;
+const appName = 'Pomodoro Timer';
+export const APP_TITLE = `${appName} | Time Management & Task List`;
+export const APP_TITLE_FOCUS = `Focus - ${appName}`;
+export const APP_TITLE_BREAK = `Break - ${appName}`;
+export const APP_TITLE_BREAK_LONG = `Long Break - ${appName}`;
