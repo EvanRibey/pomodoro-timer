@@ -15,6 +15,7 @@ export interface Song {
   artist: string,
   album: string,
   url: string,
+  artwork: MediaImage[],
 }
 
 export type Nullish = null | undefined;

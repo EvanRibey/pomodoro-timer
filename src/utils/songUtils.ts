@@ -17,6 +17,15 @@ export function createAudioLofiPlayer(track: Song, callback: Function): HTMLAudi
     newPlayer.play();
   });
 
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: track.name,
+      artist: track.artist,
+      album: track.album,
+      artwork: track.artwork,
+    });
+  }
+
   return newPlayer;
 }
 

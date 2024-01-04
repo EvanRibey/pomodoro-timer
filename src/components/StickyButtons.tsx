@@ -53,6 +53,18 @@ export default function StickyButtons() {
     prevIsPlaying,
   ]);
 
+  useEffect(() => {
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.setActionHandler('play', () => {
+        setIsPlaying(true);
+      });
+
+      navigator.mediaSession.setActionHandler('pause', () => {
+        setIsPlaying(false);
+      });
+    }
+  }, []);
+
   const renderLofiPlayerIcon = useCallback(() => {
     switch (isPlaying) {
       case true:
