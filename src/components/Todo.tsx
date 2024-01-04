@@ -5,7 +5,7 @@ import { Close } from '@mui/icons-material';
 import { TodoProps } from '../types/';
 import './Todo.less';
 
-export default function Todo({
+export function Todo({
   onComplete,
   onDelete,
   onUpdate,

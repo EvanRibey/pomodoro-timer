@@ -18,7 +18,7 @@ import {
 import { PomoFormProps } from '../types/';
 import './PomoForm.less';
 
-export default function PomoForm({ onSubmitForm }: PomoFormProps) {
+export function PomoForm({ onSubmitForm }: PomoFormProps) {
   const [numberPomodoros, setNumberPomodoros] = useState(POMODORO_INITIAL_INTERVAL);
   const [isLongPomoChecked, setIsLongPomoChecked] = useState(false);
 

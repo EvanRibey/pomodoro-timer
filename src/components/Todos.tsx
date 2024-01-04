@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 import { TodosProps } from '../types/';
-import Todo from './Todo';
+import { Todo } from '.';
 
-export default function Todos({
+export function Todos({
   onCompleteTodo,
   onDeleteTodo,
   onUpdateTodo,

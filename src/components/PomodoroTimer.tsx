@@ -1,12 +1,11 @@
 import { useCallback, useState } from 'react';
-import generateQueueList from '../utils/generateQueueList';
+import { generateQueueList } from '../utils/';
 import { PomodoroTimerFormHandlerProps, QueueItem } from '../types/';
 import { APP_TITLE } from '../constants';
-import PomoForm from './PomoForm';
-import PomoTimer from './PomoTimer';
+import { PomoForm, PomoTimer } from '.';
 import './PomodoroTimer.less';
 
-export default function PomodoroTimer() {
+export function PomodoroTimer() {
   const [queueList, setQueueList] = useState<QueueItem[]>([]);
 
   const removeAllBodyStyles = useCallback(() => {

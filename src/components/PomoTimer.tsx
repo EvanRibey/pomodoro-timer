@@ -3,8 +3,7 @@ import { IconButton, Tooltip } from '@mui/material';
 import { StopCircle } from '@mui/icons-material';
 import PomoWorker from '../workers/pomotimer.worker.js?worker';
 import { PomoTimerProps, QueueItem } from '../types/';
-import { minutesToSeconds } from '../utils/timerHelpers';
-import formatToTwoNumbers from '../utils/numberHelpers';
+import { minutesToSeconds, formatToTwoNumbers } from '../utils/';
 import {
   APP_TITLE_BREAK,
   APP_TITLE_BREAK_LONG,
@@ -26,7 +25,7 @@ import {
 import soundEffect from '../assets/countdown-sound-effect.mp3';
 import './PomoTimer.less';
 
-export default function PomoTimer({
+export function PomoTimer({
   queue,
   onTimerStart,
   onTimerEnd,
