@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import generateQueueList from '../utils/generateQueueList';
-import { PomodoroTimerFormHandlerProps, QueueItem } from '../constants/types';
+import { PomodoroTimerFormHandlerProps, QueueItem } from '../types/';
 import { APP_TITLE } from '../constants';
 import PomoForm from './PomoForm';
 import PomoTimer from './PomoTimer';

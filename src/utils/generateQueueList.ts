@@ -7,7 +7,7 @@ import {
   QUEUE_TYPE_BREAK_LONG,
   QUEUE_TYPE_FOCUS,
 } from '../constants';
-import { QueueItem } from '../constants/types';
+import { QueueItem } from '../types/';
 
 /**
  * Creates a queue list combined of the respective work/break periods

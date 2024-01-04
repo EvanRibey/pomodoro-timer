@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { IconButton, Tooltip } from '@mui/material';
 import { StopCircle } from '@mui/icons-material';
 import PomoWorker from '../workers/pomotimer.worker.js?worker';
-import { PomoTimerProps, QueueItem } from '../constants/types';
+import { PomoTimerProps, QueueItem } from '../types/';
 import { minutesToSeconds } from '../utils/timerHelpers';
 import formatToTwoNumbers from '../utils/numberHelpers';
 import {

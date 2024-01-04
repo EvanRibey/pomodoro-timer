@@ -1,4 +1,4 @@
-import { Song } from '../constants/types';
+import { Song } from '../types/';
 import { LOFI_PLAYER_TRACKS } from '../constants/lofi-tracks';
 
 export function createAudioLofiPlayer(track: Song, callback: Function): HTMLAudioElement {

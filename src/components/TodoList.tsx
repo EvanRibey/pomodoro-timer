@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { nanoid } from 'nanoid';
 import { POMO_FORM_DEFAULT_TASKS, STORAGE_KEY_TODO_LIST } from '../constants';
-import { TodoItem, TodoListCreateTodoHandlerProps } from '../constants/types';
+import { TodoItem, TodoListCreateTodoHandlerProps } from '../types/';
 import usePrevious from '../utils/usePrevious';
 import Todos from './Todos';
 import TodoForm from './TodoForm';

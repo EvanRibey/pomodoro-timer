@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { IconButton, Tooltip } from '@mui/material';
 import { PlayArrow, Pause, PlayDisabled, GitHub } from '@mui/icons-material';
 import { LOFI_PLAYER_TRACKS } from '../constants/lofi-tracks';
-import { Song } from '../constants/types';
+import { Song } from '../types/';
 import { createAudioLofiPlayer, getRandomSongIndex } from '../utils/songUtils';
 import {
   GITHUB_BUTTON_ARIA_LABEL,
