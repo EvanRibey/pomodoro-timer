@@ -2,8 +2,8 @@ import { useState, useCallback, useEffect } from 'react';
 import { IconButton, Tooltip } from '@mui/material';
 import { PlayArrow, Pause, PlayDisabled, GitHub } from '@mui/icons-material';
 import { LOFI_PLAYER_TRACKS } from '../constants/lofi-tracks';
-import { Song } from '../constants/types';
-import { createAudioLofiPlayer, getRandomSongIndex } from '../utils/songUtils';
+import { Song } from '../types/';
+import { createAudioLofiPlayer, getRandomSongIndex, usePrevious } from '../utils/';
 import {
   GITHUB_BUTTON_ARIA_LABEL,
   GITHUB_BUTTON_HREF,
@@ -14,10 +14,9 @@ import {
   LOFI_BUTTON_TOOLTIP_PLAY,
   LOFI_GIRL_CREDIT,
 } from '../constants';
-import usePrevious from '../utils/usePrevious';
 import './StickyButtons.less';
 
-export default function StickyButtons() {
+export function StickyButtons() {
   const [isPlaying, setIsPlaying] = useState<boolean | null>(null);
   const [currentTrack, setCurrentTrack] = useState<Song | null>(null);
   const [player, setPlayer] = useState<HTMLAudioElement | null>(null);
@@ -52,6 +51,18 @@ export default function StickyButtons() {
     player,
     prevIsPlaying,
   ]);
+
+  useEffect(() => {
+    if ('mediaSession' in navigator) {
+      navigator.mediaSession.setActionHandler('play', () => {
+        setIsPlaying(true);
+      });
+
+      navigator.mediaSession.setActionHandler('pause', () => {
+        setIsPlaying(false);
+      });
+    }
+  }, []);
 
   const renderLofiPlayerIcon = useCallback(() => {
     switch (isPlaying) {

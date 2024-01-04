@@ -2,10 +2,10 @@ import { useCallback } from 'react';
 import classNames from 'classnames';
 import { Checkbox, IconButton, InputAdornment, TextField } from '@mui/material';
 import { Close } from '@mui/icons-material';
-import { TodoProps } from '../constants/types';
+import { TodoProps } from '../types/';
 import './Todo.less';
 
-export default function Todo({
+export function Todo({
   onComplete,
   onDelete,
   onUpdate,

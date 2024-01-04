@@ -1,4 +1,4 @@
-import { Song } from '../constants/types';
+import { Song } from '../types/';
 import { LOFI_PLAYER_TRACKS } from '../constants/lofi-tracks';
 
 export function createAudioLofiPlayer(track: Song, callback: Function): HTMLAudioElement {
@@ -16,6 +16,15 @@ export function createAudioLofiPlayer(track: Song, callback: Function): HTMLAudi
   newPlayer.addEventListener('canplaythrough', () => {
     newPlayer.play();
   });
+
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: track.name,
+      artist: track.artist,
+      album: track.album,
+      artwork: track.artwork,
+    });
+  }
 
   return newPlayer;
 }

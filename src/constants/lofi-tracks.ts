@@ -22,6 +22,7 @@ import track21 from '../assets/music/lofi/21 towerz - fateful slumber (Kupla Mas
 import track22 from '../assets/music/lofi/22 brillion. - Crescent (Kupla Master) (1).mp3';
 import track23 from '../assets/music/lofi/23 less.people - persist (Kupla Master2).mp3';
 import track24 from '../assets/music/lofi/24 Mondoloops - Drifting Far Away (Kupla Master) (1).mp3';
+import threeAmArtwork from '../assets/3am-session-artwork.png';
 
 export const LOFI_PLAYER_TRACKS = [
   {
@@ -29,143 +30,263 @@ export const LOFI_PLAYER_TRACKS = [
     artist: 'No Spirit',
     album: '3 Am. Study Session',
     url: track1,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     name: 'somewhere else',
     artist: 'dryhope',
     album: '3 Am. Study Session',
     url: track2,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     name: 'sheets',
     artist: 'Eisu',
     album: '3 Am. Study Session',
     url: track3,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     name: 'Phantasm',
     artist: 'Casiio x Sleepermane',
     album: '3 Am. Study Session',
     url: track4,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     name: 'after sunset',
     artist: 'Project AER x WYS',
     album: '3 Am. Study Session',
     url: track5,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     artist: 'Tenno',
     name: 'Luna',
     album: '3 Am. Study Session',
     url: track6,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     artist: 'Sebastian Kamae x Intoku',
     name: 'Lucid',
     album: '3 Am. Study Session',
     url: track7,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     artist: 'epektase x j_san',
     name: 'contemplation',
     album: '3 Am. Study Session',
     url: track8,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     artist: 'Casiio x Sleepermane',
     name: 'Signals',
     album: '3 Am. Study Session',
     url: track9,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     artist: 'Phlocalyst x Living Room',
     name: 'Feelings',
     album: '3 Am. Study Session',
     url: track10,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     artist: 'Pandrezz',
     name: 'Blind Forest',
     album: '3 Am. Study Session',
     url: track11,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     artist: 'SwuM x chief.',
     name: 'Show Me How',
     album: '3 Am. Study Session',
     url: track12,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     artist: 'Comodo',
     name: 'Numb',
     album: '3 Am. Study Session',
     url: track13,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     artist: 'TABAL x mell-ø',
     name: 'Weightless',
     album: '3 Am. Study Session',
     url: track14,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     artist: 'Ambulo',
     name: 'Night Bus',
     album: '3 Am. Study Session',
     url: track15,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     artist: 'Kanisan x Frad',
     name: 'Fireflies',
     album: '3 Am. Study Session',
     url: track16,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     artist: 'H.1',
     name: 'Timeless',
     album: '3 Am. Study Session',
     url: track17,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     artist: 'Yasumu',
     name: 'Recharge',
     album: '3 Am. Study Session',
     url: track18,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     artist: 'cxlt.',
     name: 'fade away',
     album: '3 Am. Study Session',
     url: track19,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     artist: 'Mondo Loops x Kanisan',
     name: 'Escape Route',
     album: '3 Am. Study Session',
     url: track20,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     artist: 'towerz',
     name: 'fateful slumber',
     album: '3 Am. Study Session',
     url: track21,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     artist: 'brillion.',
     name: 'Crescent',
     album: '3 Am. Study Session',
     url: track22,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     artist: 'less.people',
     name: 'persist',
     album: '3 Am. Study Session',
     url: track23,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
   {
     artist: 'Mondoloops',
     name: 'Drifting Far Away',
     album: '3 Am. Study Session',
     url: track24,
+    artwork: [{
+      src: threeAmArtwork,
+      sizes: '512x512',
+      type: 'image/png',
+    }],
   },
 ];

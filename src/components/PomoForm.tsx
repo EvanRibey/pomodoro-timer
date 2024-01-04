@@ -15,10 +15,10 @@ import {
   POMO_FORM_NAME_CHECKBOX,
   POMO_FORM_NAME_TEXTFIELD,
 } from '../constants';
-import { PomoFormProps } from '../constants/types';
+import { PomoFormProps } from '../types/';
 import './PomoForm.less';
 
-export default function PomoForm({ onSubmitForm }: PomoFormProps) {
+export function PomoForm({ onSubmitForm }: PomoFormProps) {
   const [numberPomodoros, setNumberPomodoros] = useState(POMODORO_INITIAL_INTERVAL);
   const [isLongPomoChecked, setIsLongPomoChecked] = useState(false);
 
