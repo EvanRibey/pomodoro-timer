@@ -5,6 +5,7 @@ export const QUEUE_TYPE_BREAK_LONG = 'longBreak';
 
 // storage keys
 export const STORAGE_KEY_TODO_LIST = 'todoListItems';
+export const STORAGE_KEY_POMO_LONG = 'pomoLongBoolean';
 
 // form names
 export const TODO_FORM_NAME_CHECKBOX = 'isComplete';
