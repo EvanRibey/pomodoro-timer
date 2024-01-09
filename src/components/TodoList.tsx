@@ -1,28 +1,16 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback } from 'react';
 import { nanoid } from 'nanoid';
 import { POMO_FORM_DEFAULT_TASKS, STORAGE_KEY_TODO_LIST } from '../constants';
 import { TodoItem, TodoListCreateTodoHandlerProps } from '../types/';
-import { usePrevious } from '../utils/';
+import { useLocalStorage } from '../utils/';
 import { Todos, TodoForm } from '.';
 import './TodoList.less';
 
 export function TodoList() {
-  const initialTodoItems = useMemo(() => {
-    const initialTodoItems = localStorage.getItem(STORAGE_KEY_TODO_LIST);
-    if (initialTodoItems) return JSON.parse(initialTodoItems);
-    return null;
-  }, []);
-
-  const [todos, setTodos] = useState<TodoItem[]>(initialTodoItems || POMO_FORM_DEFAULT_TASKS);
-
-  const prevTodos = usePrevious(todos);
-
-  const setStorage = useCallback((newTodos: TodoItem[]) => {
-    localStorage.setItem(STORAGE_KEY_TODO_LIST, JSON.stringify(newTodos));
-  }, []);
+  const [todos, setTodos] = useLocalStorage<TodoItem[]>(STORAGE_KEY_TODO_LIST, POMO_FORM_DEFAULT_TASKS);
 
   const completeTodoHandler = useCallback((todoId: string) => {
-    setTodos((prevTodos) => prevTodos.map((todo) => {
+    setTodos((prevTodos: TodoItem[]) => prevTodos.map((todo) => {
       if (todo.id !== todoId) return todo;
       return {
         ...todo,
@@ -32,7 +20,7 @@ export function TodoList() {
   }, []);
 
   const updateTodoHandler = useCallback((todoId: string, newTodoName: string) => {
-    setTodos((prevTodos) => prevTodos.map((todo) => {
+    setTodos((prevTodos: TodoItem[]) => prevTodos.map((todo) => {
       if (todo.id !== todoId) return todo;
       return {
         ...todo,
@@ -42,11 +30,11 @@ export function TodoList() {
   }, []);
 
   const deleteTodoHandler = useCallback((todoId: string) => {
-    setTodos((prevTodos) => prevTodos.filter(todo => todo.id !== todoId));
+    setTodos((prevTodos: TodoItem[]) => prevTodos.filter(todo => todo.id !== todoId));
   }, []);
 
   const createTodoHandler = useCallback(({ name, isComplete }: TodoListCreateTodoHandlerProps) => {
-    setTodos((prevTodos) => ([
+    setTodos((prevTodos: TodoItem[]) => ([
       ...prevTodos,
       {
         id: nanoid(),
@@ -55,12 +43,6 @@ export function TodoList() {
       },
     ]));
   }, []);
-
-  useEffect(() => {
-    if (todos !== prevTodos) {
-      setStorage(todos);
-    }
-  }, [prevTodos, setStorage, todos]);
 
   return (
     <div className="todo-list">

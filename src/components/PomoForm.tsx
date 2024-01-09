@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import {
   Button,
   FormControlLabel,
@@ -17,21 +17,12 @@ import {
   STORAGE_KEY_POMO_LONG,
 } from '../constants';
 import { PomoFormProps } from '../types/';
+import { useLocalStorage } from '../utils/';
 import './PomoForm.less';
 
 export function PomoForm({ onSubmitForm }: PomoFormProps) {
-  const initialPomoLongStatus = useMemo(() => {
-    const initialState = localStorage.getItem(STORAGE_KEY_POMO_LONG);
-    if (initialState) return JSON.parse(initialState);
-    return false;
-  }, []);
-
   const [numberPomodoros, setNumberPomodoros] = useState(POMODORO_INITIAL_INTERVAL);
-  const [isLongPomoChecked, setIsLongPomoChecked] = useState<boolean>(initialPomoLongStatus || false);
-
-  const setStorage = useCallback((newLongChecked: boolean) => {
-    localStorage.setItem(STORAGE_KEY_POMO_LONG, String(newLongChecked));
-  }, []);
+  const [isLongPomoChecked, setIsLongPomoChecked] = useLocalStorage<boolean>(STORAGE_KEY_POMO_LONG, false);
 
   const setPomodoroIntervalsHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setNumberPomodoros(Number(event.currentTarget.value));
@@ -50,10 +41,6 @@ export function PomoForm({ onSubmitForm }: PomoFormProps) {
       isLong: formData.get(POMO_FORM_NAME_CHECKBOX) === 'on',
     });
   }, []);
-
-  useEffect(() => {
-    setStorage(isLongPomoChecked);
-  }, [setStorage, isLongPomoChecked]);
 
   const countNote = numberPomodoros >= 4 ? POMO_FORM_HELPER_COUNT : '';
 
