@@ -14,13 +14,15 @@ import {
   POMO_FORM_LABEL_LONG_CYCLES,
   POMO_FORM_NAME_CHECKBOX,
   POMO_FORM_NAME_TEXTFIELD,
+  STORAGE_KEY_POMO_LONG,
 } from '../constants';
 import { PomoFormProps } from '../types/';
+import { useLocalStorage } from '../utils/';
 import './PomoForm.less';
 
 export function PomoForm({ onSubmitForm }: PomoFormProps) {
   const [numberPomodoros, setNumberPomodoros] = useState(POMODORO_INITIAL_INTERVAL);
-  const [isLongPomoChecked, setIsLongPomoChecked] = useState(false);
+  const [isLongPomoChecked, setIsLongPomoChecked] = useLocalStorage<boolean>(STORAGE_KEY_POMO_LONG, false);
 
   const setPomodoroIntervalsHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setNumberPomodoros(Number(event.currentTarget.value));
