@@ -1,9 +1,11 @@
 import { useState, useCallback, useEffect } from 'react';
-import { IconButton, Tooltip } from '@mui/material';
-import { PlayArrow, Pause, PlayDisabled, GitHub } from '@mui/icons-material';
-import { LOFI_PLAYER_TRACKS } from '../constants/lofi-tracks';
-import { Song } from '../types/';
-import { createAudioLofiPlayer, getRandomSongIndex, usePrevious } from '../utils/';
+import { IconButton, Menu, MenuItem, Tooltip } from '@mui/material';
+import { PlayArrow, Pause, PlayDisabled, GitHub, MoreVert } from '@mui/icons-material';
+import { LOFI_PLAYER_TRACKS } from '@/constants/lofi-tracks';
+import { Song } from '@/types';
+import { createAudioLofiPlayer, getRandomSongIndex, usePrevious } from '@/utils';
+import { useAppDispatch } from '@/app/hooks';
+import { deleteCompleteTodos } from '@/features/todolist/todolistSlice';
 import {
   GITHUB_BUTTON_ARIA_LABEL,
   GITHUB_BUTTON_HREF,
@@ -13,15 +15,19 @@ import {
   LOFI_BUTTON_TOOLTIP_PAUSE,
   LOFI_BUTTON_TOOLTIP_PLAY,
   LOFI_GIRL_CREDIT,
-} from '../constants';
+} from '@/constants';
 import './StickyButtons.less';
 
 export function StickyButtons() {
+  const dispatch = useAppDispatch();
+
   const [isPlaying, setIsPlaying] = useState<boolean | null>(null);
   const [currentTrack, setCurrentTrack] = useState<Song | null>(null);
   const [player, setPlayer] = useState<HTMLAudioElement | null>(null);
+  const [optionsAnchorEl, setOptionsAnchorEl] = useState<null | HTMLElement>(null);
 
   const prevIsPlaying = usePrevious(isPlaying);
+  const isOptionsOpen = Boolean(optionsAnchorEl);
 
   const createLofiPlayer = useCallback((trackName: string | null = null) => {
     const track = LOFI_PLAYER_TRACKS.find(({ name }) => name === trackName) || LOFI_PLAYER_TRACKS[getRandomSongIndex()];
@@ -76,6 +82,19 @@ export function StickyButtons() {
     }
   }, [isPlaying]);
 
+  const clickMoreOptions = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
+    setOptionsAnchorEl(event.currentTarget);
+  }, []);
+
+  const closeMoreOptions = useCallback(() => {
+    setOptionsAnchorEl(null);
+  }, []);
+
+  const clickDeleteCheckedTodos = useCallback(() => {
+    dispatch(deleteCompleteTodos());
+    setOptionsAnchorEl(null);
+  }, [dispatch]);
+
   const renderLofiPlayerTooltipTitle = useCallback(() => {
     switch (isPlaying) {
       case true:
@@ -116,6 +135,19 @@ export function StickyButtons() {
             <GitHub />
           </IconButton>
         </Tooltip>
+        <IconButton
+          aria-label="more options"
+          onClick={clickMoreOptions}
+        >
+          <MoreVert />
+        </IconButton>
+        <Menu
+          open={isOptionsOpen}
+          anchorEl={optionsAnchorEl}
+          onClose={closeMoreOptions}
+        >
+          <MenuItem onClick={clickDeleteCheckedTodos}>Delete checked items</MenuItem>
+        </Menu>
       </div>
     </div>
   );

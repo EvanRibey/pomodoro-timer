@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { TodosProps } from '../types/';
+import { TodosProps } from '@/types';
 import { Todo } from '.';
 
 export function Todos({

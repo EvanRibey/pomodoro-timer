@@ -59,3 +59,12 @@ export interface TodoListCreateTodoHandlerProps {
   name: string,
   isComplete: boolean,
 }
+
+// redux types
+export type LoadingState = 'idle' | 'pending' | 'succeeded' | 'failed';
+
+export interface TodosState {
+  todos: TodoItem[],
+  loading: LoadingState,
+}
+
