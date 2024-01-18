@@ -9,7 +9,7 @@ const listenerMiddleware = createListenerMiddleware();
 listenerMiddleware.startListening({
   matcher: isAnyOf(createTodo, deleteTodo, toggleTodo, updateTodo),
   effect: (_action, { getState }) => {
-    const { todos: { todos }} = getState() as RootState;
+    const { todolist: { todos }} = getState() as RootState;
     localStorage.setItem(STORAGE_KEY_TODO_LIST, JSON.stringify(todos));
   },
 });

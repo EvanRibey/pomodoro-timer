@@ -2,12 +2,18 @@ import { useCallback } from 'react';
 import { TodoListCreateTodoHandlerProps } from '@/common/types';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { Todos, TodoForm } from '.';
+import {
+  createTodo,
+  deleteTodo,
+  toggleTodo,
+  updateTodo,
+} from './todolistSlice';
 import './TodoList.less';
-import { createTodo, deleteTodo, toggleTodo, updateTodo } from './todolistSlice';
 
 export function TodoList() {
   const dispatch = useAppDispatch();
-  const { todos } = useAppSelector((state) => state.todos);
+
+  const { todos } = useAppSelector(({ todolist }) => todolist);
 
   const completeTodoHandler = useCallback((todoId: string) => {
     dispatch(toggleTodo(todoId));
