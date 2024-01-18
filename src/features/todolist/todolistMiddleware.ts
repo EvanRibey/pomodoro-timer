@@ -1,13 +1,17 @@
 import { createListenerMiddleware, isAnyOf } from '@reduxjs/toolkit';
 import {
-  createTodo, deleteTodo, toggleTodo, updateTodo
+  createTodo,
+  deleteCompleteTodos,
+  deleteTodo,
+  toggleTodo,
+  updateTodo,
 } from './todolistSlice';
 import { STORAGE_KEY_TODO_LIST } from '@/common/constants';
 import { RootState } from '@/app/store';
 
 const listenerMiddleware = createListenerMiddleware();
 listenerMiddleware.startListening({
-  matcher: isAnyOf(createTodo, deleteTodo, toggleTodo, updateTodo),
+  matcher: isAnyOf(createTodo, deleteTodo, toggleTodo, updateTodo, deleteCompleteTodos),
   effect: (_action, { getState }) => {
     const { todolist: { todos }} = getState() as RootState;
     localStorage.setItem(STORAGE_KEY_TODO_LIST, JSON.stringify(todos));
