@@ -3,7 +3,7 @@ import { initialState } from './redux/initialState';
 import { default as reduxReducers } from './redux/reducers';
 import { default as reduxExtraReducers } from './redux/extraReducers';
 
-const { actions, reducer } = createSlice({
+const slice = createSlice({
   name: 'todolist',
   initialState,
   reducers: reduxReducers,
@@ -15,7 +15,8 @@ export const {
   deleteTodo,
   deleteCompleteTodos,
   toggleTodo,
+  completeTodos,
   updateTodo,
-} = actions;
+} = slice.actions;
 
-export default reducer;
+export default slice;

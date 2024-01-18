@@ -5,7 +5,7 @@ import { LOFI_PLAYER_TRACKS } from '@/common/constants/lofi-tracks';
 import { Song } from '@/common/types';
 import { createAudioLofiPlayer, getRandomSongIndex, usePrevious } from '@/common/utils';
 import { useAppDispatch } from '@/app/hooks';
-import { deleteCompleteTodos } from '@/features/todolist/todolistSlice';
+import { completeTodos, deleteCompleteTodos } from '@/features/todolist/todolistSlice';
 import {
   GITHUB_BUTTON_ARIA_LABEL,
   GITHUB_BUTTON_HREF,
@@ -95,6 +95,11 @@ export function StickyButtons() {
     setOptionsAnchorEl(null);
   }, [dispatch]);
 
+  const clickCompleteTodos = useCallback(() => {
+    dispatch(completeTodos());
+    setOptionsAnchorEl(null);
+  }, [dispatch]);
+
   const renderLofiPlayerTooltipTitle = useCallback(() => {
     switch (isPlaying) {
       case true:
@@ -146,7 +151,8 @@ export function StickyButtons() {
           anchorEl={optionsAnchorEl}
           onClose={closeMoreOptions}
         >
-          <MenuItem onClick={clickDeleteCheckedTodos}>Delete checked items</MenuItem>
+          <MenuItem onClick={clickDeleteCheckedTodos}>Delete completed items</MenuItem>
+          <MenuItem onClick={clickCompleteTodos}>Mark all items complete</MenuItem>
         </Menu>
       </div>
     </div>
