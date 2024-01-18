@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { TodoListCreateTodoHandlerProps } from '@/types';
+import { TodoListCreateTodoHandlerProps } from '@/common/types';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { Todos, TodoForm } from '.';
 import './TodoList.less';

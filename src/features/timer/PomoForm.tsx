@@ -15,9 +15,9 @@ import {
   POMO_FORM_NAME_CHECKBOX,
   POMO_FORM_NAME_TEXTFIELD,
   STORAGE_KEY_POMO_LONG,
-} from '@/constants';
-import { PomoFormProps } from '@/types';
-import { useLocalStorage } from '@/utils';
+} from '@/common/constants';
+import { PomoFormProps } from '@/common/types';
+import { useLocalStorage } from '@/common/utils';
 import './PomoForm.less';
 
 export function PomoForm({ onSubmitForm }: PomoFormProps) {

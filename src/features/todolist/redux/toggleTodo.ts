@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { TodosState } from '../../../types';
+import { TodosState } from '@/common/types';
 
 export function toggleTodo(state: TodosState, action: PayloadAction<string>) {
   return {

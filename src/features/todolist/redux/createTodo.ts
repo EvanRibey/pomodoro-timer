@@ -1,6 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
-import type { TodoItem, TodosState } from '../../../types';
+import type { TodoItem, TodosState } from '@/common/types';
 
 export const createTodo = {
   reducer: (state: TodosState, action: PayloadAction<TodoItem>) => {

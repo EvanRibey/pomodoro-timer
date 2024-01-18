@@ -1,5 +1,5 @@
-import { PayloadAction } from "@reduxjs/toolkit";
-import { TodoItem, TodosState } from '../../../types';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { TodoItem, TodosState } from '@/common/types';
 
 export function updateTodo(state: TodosState, action: PayloadAction<Partial<TodoItem>>) {
   const { id, name } = action.payload;

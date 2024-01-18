@@ -2,7 +2,7 @@ import { createListenerMiddleware, isAnyOf } from '@reduxjs/toolkit';
 import {
   createTodo, deleteTodo, toggleTodo, updateTodo
 } from './todolistSlice';
-import { STORAGE_KEY_TODO_LIST } from '@/constants';
+import { STORAGE_KEY_TODO_LIST } from '@/common/constants';
 import { RootState } from '@/app/store';
 
 const listenerMiddleware = createListenerMiddleware();

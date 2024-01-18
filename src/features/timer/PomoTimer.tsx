@@ -2,8 +2,8 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { IconButton, Tooltip } from '@mui/material';
 import { StopCircle } from '@mui/icons-material';
 import PomoWorker from '@/workers/pomotimer.worker.js?worker';
-import { PomoTimerProps, QueueItem } from '@/types';
-import { minutesToSeconds, formatToTwoNumbers } from '@/utils';
+import { PomoTimerProps, QueueItem } from '@/common/types';
+import { minutesToSeconds, formatToTwoNumbers } from '@/common/utils';
 import {
   APP_TITLE_BREAK,
   APP_TITLE_BREAK_LONG,
@@ -21,7 +21,7 @@ import {
   QUEUE_TYPE_BREAK,
   QUEUE_TYPE_BREAK_LONG,
   QUEUE_TYPE_FOCUS,
-} from '@/constants';
+} from '@/common/constants';
 import soundEffect from '@/assets/countdown-sound-effect.mp3';
 import './PomoTimer.less';
 

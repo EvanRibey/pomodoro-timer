@@ -1,9 +1,9 @@
 import { useState, useCallback, useEffect } from 'react';
 import { IconButton, Menu, MenuItem, Tooltip } from '@mui/material';
 import { PlayArrow, Pause, PlayDisabled, GitHub, MoreVert } from '@mui/icons-material';
-import { LOFI_PLAYER_TRACKS } from '@/constants/lofi-tracks';
-import { Song } from '@/types';
-import { createAudioLofiPlayer, getRandomSongIndex, usePrevious } from '@/utils';
+import { LOFI_PLAYER_TRACKS } from '@/common/constants/lofi-tracks';
+import { Song } from '@/common/types';
+import { createAudioLofiPlayer, getRandomSongIndex, usePrevious } from '@/common/utils';
 import { useAppDispatch } from '@/app/hooks';
 import { deleteCompleteTodos } from '@/features/todolist/todolistSlice';
 import {
@@ -15,7 +15,7 @@ import {
   LOFI_BUTTON_TOOLTIP_PAUSE,
   LOFI_BUTTON_TOOLTIP_PLAY,
   LOFI_GIRL_CREDIT,
-} from '@/constants';
+} from '@/common/constants';
 import './StickyButtons.less';
 
 export function StickyButtons() {

@@ -1,5 +1,5 @@
-import { STORAGE_KEY_TODO_LIST } from '@/constants';
-import { TodoItem } from '@/types';
+import { STORAGE_KEY_TODO_LIST } from '@/common/constants';
+import { TodoItem } from '@/common/types';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const loadTodos = createAsyncThunk<TodoItem[], void>(

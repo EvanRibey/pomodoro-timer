@@ -1,5 +1,5 @@
-import { POMO_FORM_DEFAULT_TASKS } from '@/constants/';
-import { TodosState } from '@/types';
+import { POMO_FORM_DEFAULT_TASKS } from '@/common/constants';
+import { TodosState } from '@/common/types';
 
 export const initialState = {
   todos: POMO_FORM_DEFAULT_TASKS,

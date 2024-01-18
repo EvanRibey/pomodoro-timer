@@ -1,16 +1,18 @@
 import { ThemeProvider } from '@mui/material';
 import { useEffect } from 'react';
-import { theme } from '@/utils';
+import { theme } from '@/common/utils';
 import { useAppDispatch } from '@/app/hooks';
-import { PomodoroTimer, TodoList, StickyButtons } from '@/features';
+import { PomodoroTimer } from '@/features/timer';
+import { TodoList } from '@/features/todolist';
+import { loadTodos } from '@/features/todolist/redux/loadTodos';
+import { StickyButtons } from '@/features/buttons';
 import './App.less';
-import { loadTodos } from './features/todolist/redux/loadTodos';
 
 export default function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // @ts-ignore
+    // @ts-ignore -- this should work, but TS continues to complain
     dispatch(loadTodos());
   }, [dispatch]);
 
