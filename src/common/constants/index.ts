@@ -3,6 +3,12 @@ export const QUEUE_TYPE_FOCUS = 'focus';
 export const QUEUE_TYPE_BREAK = 'break';
 export const QUEUE_TYPE_BREAK_LONG = 'longBreak';
 
+// loading state
+export const PENDING = 'pending';
+export const IDLE = 'idle';
+export const FAILED = 'failed';
+export const SUCCEEDED = 'succeeded';
+
 // storage keys
 export const STORAGE_KEY_TODO_LIST = 'todoListItems';
 export const STORAGE_KEY_POMO_LONG = 'pomoLongStatus';

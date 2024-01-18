@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import classNames from 'classnames';
 import { Checkbox, IconButton, InputAdornment, TextField } from '@mui/material';
 import { Close } from '@mui/icons-material';
-import { TodoProps } from '../types/';
+import { TodoProps } from '@/common/types';
 import './Todo.less';
 
 export function Todo({
