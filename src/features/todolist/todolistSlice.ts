@@ -15,6 +15,7 @@ export const {
   deleteTodo,
   deleteCompleteTodos,
   toggleTodo,
+  completeTodos,
   updateTodo,
 } = slice.actions;
 
