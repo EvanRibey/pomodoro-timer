@@ -19,7 +19,7 @@ export function Todo({
 
   const changeTodoCompleteHandler = useCallback(() => {
     onComplete(name);
-  }, [onComplete]);
+  }, [name, onComplete]);
 
   const deleteTodoHandler = useCallback(() => {
     onDelete();
