@@ -22,7 +22,7 @@ import track21 from '@/assets/music/lofi/21 towerz - fateful slumber (Kupla Mast
 import track22 from '@/assets/music/lofi/22 brillion. - Crescent (Kupla Master) (1).mp3';
 import track23 from '@/assets/music/lofi/23 less.people - persist (Kupla Master2).mp3';
 import track24 from '@/assets/music/lofi/24 Mondoloops - Drifting Far Away (Kupla Master) (1).mp3';
-import threeAmArtwork from '@/assets/3am-session-artwork.png';
+import { threeAmArtwork } from '@/assets';
 
 export const LOFI_PLAYER_TRACKS = [
   {

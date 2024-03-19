@@ -22,7 +22,7 @@ import {
   QUEUE_TYPE_BREAK_LONG,
   QUEUE_TYPE_FOCUS,
 } from '@/common/constants';
-import soundEffect from '@/assets/countdown-sound-effect.mp3';
+import { countdownSoundEffect, winSoundEffect } from '@/assets';
 import './PomoTimer.less';
 
 export function PomoTimer({
@@ -39,12 +39,13 @@ export function PomoTimer({
   const minutes = Math.floor(countdownTime / MINUTES_IN_SECOND);
   const seconds = formatToTwoNumbers(countdownTime - minutes * MINUTES_IN_SECOND);
 
-  const soundEffectAudio = useMemo(() => new Audio(soundEffect), []);
+  const countdownEffectAudio = useMemo(() => new Audio(countdownSoundEffect), []);
+  const winEffectAudio = useMemo(() => new Audio(winSoundEffect), []);
 
   const clickStopButtonHandler = useCallback(() => {
-    soundEffectAudio.pause();
+    countdownEffectAudio.pause();
     onTimerEnd();
-  }, [soundEffectAudio, onTimerEnd]);
+  }, [countdownEffectAudio, onTimerEnd]);
 
   useEffect(() => {
     const workerInstance = new PomoWorker();
@@ -74,8 +75,10 @@ export function PomoTimer({
       setCountdownTime(minutesToSeconds(nextQueueItem.duration));
 
       onTimerStart(nextQueueItem);
-    } else if (countdownTime === 3) {
-      soundEffectAudio.play();
+    } else if (countdownTime === 3 && countdownType === QUEUE_TYPE_FOCUS) {
+      winEffectAudio.play();
+    } else if (countdownTime === 3 && (countdownType === QUEUE_TYPE_BREAK || countdownType === QUEUE_TYPE_BREAK_LONG)) {
+      countdownEffectAudio.play();
     } else {
       let appTitle = '';
 
@@ -96,7 +99,17 @@ export function PomoTimer({
 
       document.title = `${minutes}:${seconds} - ${appTitle}`;
     }
-  }, [countdownTime, remainingQueue, soundEffectAudio]);
+  }, [
+    countdownEffectAudio,
+    countdownTime,
+    countdownType,
+    minutes,
+    onTimerEnd,
+    onTimerStart,
+    remainingQueue,
+    seconds,
+    winSoundEffect,
+  ]);
 
   const sandHeight = POMODORO_TIMER_HEIGHT * countdownTime / minutesToSeconds(countdownDuration);
   let title = '';
