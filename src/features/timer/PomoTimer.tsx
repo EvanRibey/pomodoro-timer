@@ -77,7 +77,7 @@ export function PomoTimer({
       onTimerStart(nextQueueItem);
     } else if (countdownTime === 3 && countdownType === QUEUE_TYPE_FOCUS) {
       winEffectAudio.play();
-    } else if (countdownTime === 3 && countdownType === QUEUE_TYPE_BREAK) {
+    } else if (countdownTime === 3 && (countdownType === QUEUE_TYPE_BREAK || countdownType === QUEUE_TYPE_BREAK_LONG)) {
       countdownEffectAudio.play();
     } else {
       let appTitle = '';
