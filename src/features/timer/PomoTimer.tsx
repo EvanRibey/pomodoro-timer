@@ -22,7 +22,7 @@ import {
   QUEUE_TYPE_BREAK_LONG,
   QUEUE_TYPE_FOCUS,
 } from '@/common/constants';
-import soundEffect from '@/assets/countdown-sound-effect.mp3';
+import { countdownSoundEffect } from '@/assets';
 import './PomoTimer.less';
 
 export function PomoTimer({
@@ -39,7 +39,7 @@ export function PomoTimer({
   const minutes = Math.floor(countdownTime / MINUTES_IN_SECOND);
   const seconds = formatToTwoNumbers(countdownTime - minutes * MINUTES_IN_SECOND);
 
-  const soundEffectAudio = useMemo(() => new Audio(soundEffect), []);
+  const soundEffectAudio = useMemo(() => new Audio(countdownSoundEffect), []);
 
   const clickStopButtonHandler = useCallback(() => {
     soundEffectAudio.pause();
